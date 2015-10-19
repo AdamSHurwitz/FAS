@@ -16,15 +16,10 @@ import android.widget.ImageView;
  */
 public class MainActivityFragment extends Fragment {
 
-    private final Integer[] dummyData = {R.drawable.doodle13_1, R.drawable.doodle13_2,
-            R.drawable.doodle13_3, R.drawable.doodle13_4, R.drawable.doodle13_5,
-            R.drawable.doodle13_6, R.drawable.doodle13_7, R.drawable.doodle13_8,
-            R.drawable.doodle13_9, R.drawable.doodle13_10, R.drawable.doodle13_11,
-            R.drawable.doodle13_12, R.drawable.doodle13_13, R.drawable.doodle13_14,
-            R.drawable.doodle13_15, R.drawable.doodle13_16, R.drawable.doodle13_17,
-            R.drawable.doodle13_18, R.drawable.doodle13_19, R.drawable.doodle13_20,
-            R.drawable.doodle13_21, R.drawable.doodle13_22, R.drawable.doodle13_23,
-            R.drawable.doodle13_24};
+    private final Integer[] dummyData = {R.drawable.doodle1,R.drawable.doodle2,R.drawable.doodle3,
+            R.drawable.doodle4,R.drawable.doodle5,R.drawable.doodle6,R.drawable.doodle7,
+            R.drawable.doodle8,R.drawable.doodle9,R.drawable.doodle10,R.drawable.doodle11,
+            R.drawable.doodle12};
 
     // used for Array of Integers when using dummy data
     // private class GridViewAdapter extends ArrayAdapter<Integer> {
