@@ -2,4 +2,9 @@
     <string name="app_name">FAS</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_section1">Popular</string>
+    <string name="title_section2">Recent</string>
+    <string name="title_section3">Vintage</string>
+    <string name="tab3_textview">Soy Renagado</string>
 </resources>

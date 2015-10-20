@@ -30,7 +30,7 @@ public class MainActivityFragment extends Fragment {
 
         /**
          * @param context  is the Context
-         * @param resource is the grid_view_layout
+         * @param resource is the tab1
          */
         // creates contructor to create GridViewAdapter object
         public GridViewAdapter(Context context, int resource) {
@@ -83,7 +83,7 @@ public class MainActivityFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grid_view_layout, container, false);
+        View view = inflater.inflate(R.layout.tab1, container, false);
 
         dummyDataAdapter = new GridViewAdapter(
                 // current context (this fragment's containing activity)
@@ -93,7 +93,7 @@ public class MainActivityFragment extends Fragment {
 
 
         // Get a reference to GridView, and attach this adapter to it
-        GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
+        GridView gridView = (GridView) view.findViewById(R.id.tab1);
         gridView.setAdapter(dummyDataAdapter);
         return view;
     }
