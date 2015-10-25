@@ -1,5 +1,6 @@
 package com.example.adamhurwitz.fas;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class TabsAdapter extends FragmentPagerAdapter {
 
     // The list of fragments that the adapter holds.
-    private final List<TabFragment> mFragments = new ArrayList<>();
+    private final List<Fragment> mFragments = new ArrayList<>();
 
     // The list of titles corresponding to each of the fragments. Each fragment is a new tab.
     private final List<String> mFragmentTitles = new ArrayList<>();
@@ -30,13 +31,13 @@ public class TabsAdapter extends FragmentPagerAdapter {
      * @param fragment An android application fragment.
      * @param title    A string of the fragment name to use for the title of the tab.
      */
-    public void addFragment(TabFragment fragment, String title) {
+    public void addFragment(Fragment fragment, String title) {
         mFragments.add(fragment);
         mFragmentTitles.add(title);
     }
 
     @Override
-    public TabFragment getItem(int position) {
+    public Fragment getItem(int position) {
         return mFragments.get(position);
     }
 

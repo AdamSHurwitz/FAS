@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/window_background"
-    tools:context=".NavTabsFragment$PlaceholderFragment">
+    tools:context=".TabFragment2">
 
     <GridView
-        android:id="@+id/tab1"
+        android:id="@+id/grid_view_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

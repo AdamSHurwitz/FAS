@@ -16,11 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        if (navigationView != null) {
-////            setupDrawerContent(navigationView);
-//        }
-
+        // This loads viewPager for multiple tab views
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         if (viewPager != null) {
             setupViewPager(viewPager);
@@ -28,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
             tabLayout.setupWithViewPager(viewPager);
         }
 
+        // Creates DrawerLayout and inflates it's xml view
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        // NavTab interactions
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
@@ -37,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Enables Drawer
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -48,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    // Add Fragments to the TabsAdapter, TabsAdapter recycles views
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TabFragment(), "Category 1");
-        adapter.addFragment(new TabFragment(), "Category 2");
-        adapter.addFragment(new TabFragment(), "Category 3");
+        adapter.addFragment(new PopularFragment(), "Popular");
+        adapter.addFragment(new RecentFragment(), "Recent");
+        adapter.addFragment(new VintageFragment(), "Vintage");
         viewPager.setAdapter(adapter);
     }
 
