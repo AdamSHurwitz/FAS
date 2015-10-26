@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Creates DrawerLayout and inflates it's xml view
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // NavTab interactions
+        // Drawer interactions
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
