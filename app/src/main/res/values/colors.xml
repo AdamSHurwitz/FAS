@@ -3,5 +3,5 @@
     <color name="window_background">#FFFFFF</color>
     <color name="grid_item_color">#FFFFFF</color>
     <color name="grid_view_color">#66BB6A</color>
+    <color name="primary">#66BB6A</color>
 </resources>
-<color name="primary">#66BB6A</color>
