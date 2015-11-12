@@ -1,10 +1,40 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
+
+        <!-- Action Bar -->
+
+        <!-- color of action bar (use 500 color) -->
+        <item name="colorPrimary">#C62828</item>
+        <!-- color of statusbar (use 700 color) -->
+        <item name="colorPrimaryDark">#B71C1C</item>
+        <!-- color of action bar text-->
+        <item name="android:textColor">#EEEEEE</item>
+        <!-- color of action bar menu text-->
+        <item name="android:actionMenuTextColor">#EEEEEE</item>
+        <!-- color of navigation bar-->
+        <item name="@android:navigationBarColor">@android:color/transparent</item>
+
+        <!-- Status Bar -->
+        <!-- Needs to Be Transparent for DrawerView -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <!-- Main Elements -->
+        <item name="@android:windowBackground">@color/window_background</item>
         <!-- text color -->
         <item name="android:textColorPrimary">#EEEEEE</item>
+        <!-- accent coloring for views (ie: Checkboxes, EditText) -->
+        <item name="colorAccent">#E0E0E0</item>
+        <!--background color of buttons-->
+        <item name="colorButtonNormal">#000</item>
+
+    </style>
+
+    <!-- Drawer Style -->
+    <style name="DrawerTheme">
+        <item name="android:background">#FBE9E7</item>
     </style>
 
 </resources>

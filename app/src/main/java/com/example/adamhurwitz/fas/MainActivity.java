@@ -3,29 +3,23 @@ package com.example.adamhurwitz.fas;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
-
-    // DrawerView: Create Strings Array and ListView
-
-    // Create Array of Strings for DrawerView menu
-    private String[] drawerItems;
-    private DrawerLayout mDrawerLayout;
-    // Create ListView to use to show DrawerView menu items
-    private ListView mDrawerList;
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // DrawerView: Build Action Bar - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // ----------------------------------------------------------------------------------------
 
         // NavTabs: This loads viewPager for multiple tab views
 
@@ -35,27 +29,10 @@ public class MainActivity extends AppCompatActivity {
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             tabLayout.setupWithViewPager(viewPager);
         }
-        // ----------------------------------------------------------------------------------------
-
-        // DrawerView
-
-        // get Array[] of items
-        drawerItems = getResources().getStringArray(R.array.sample_array);
-        // get View of drawer_layout
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        // get View of ListView id
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_item_view, drawerItems));
-        // Set the list's click listener
-        //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        // ----------------------------------------------------------------------------------------
     }
 
-    // Add Fragments to the TabsAdapter, TabsAdapter recycles views
+    // NavTabs: Add Fragments to the TabsAdapter, TabsAdapter recycles views - - - - - - - - - - - -
+
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         adapter.addFragment(new PopularFragment(), "Popular");
@@ -63,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new VintageFragment(), "Vintage");
         viewPager.setAdapter(adapter);
     }
+    // ---------------------------------------------------------------------------------------------
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

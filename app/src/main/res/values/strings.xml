@@ -7,4 +7,12 @@
     <string name="title_section2">Recent</string>
     <string name="title_section3">Vintage</string>
     <string name="tab3_textview">Soy Renagado</string>
+
+    <!-- Drawer View -->
+    <string name="drawer_title">Drawer Title</string>
+    <string name="navigation_subheader">Sub Header</string>
+    <string name="navigation_subheader_2">Sub Header 2</string>
+    <string name="navigation_sub_item_1">Sub Item 1</string>
+    <string name="navigation_sub_item_2">Sub Item 2</string>
+
 </resources>
