@@ -9,10 +9,11 @@
     <string name="tab3_textview">Soy Renagado</string>
 
     <!-- Drawer View -->
-    <string name="drawer_title">Drawer Title</string>
-    <string name="navigation_subheader">Sub Header</string>
-    <string name="navigation_subheader_2">Sub Header 2</string>
-    <string name="navigation_sub_item_1">Sub Item 1</string>
-    <string name="navigation_sub_item_2">Sub Item 2</string>
+    <string name="drawer_title">Menu</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="cart">Cart</string>
+    <string name="closeDrawer">Navigation View</string>
+    <string name="openDrawer">Navigation View Closed</string>
 
 </resources>
