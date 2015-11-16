@@ -130,7 +130,7 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
     }
 
     /**
-     * Gets the relative poster paths for each movie in the returned JSON response.
+     * Parses the JSON response for information about the Google doodles.
      * @param doodleDataJsonResponse A JSON string which needs to be parsed for data about the
      *                               Google doodles.
      */
