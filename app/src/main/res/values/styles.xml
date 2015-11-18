@@ -17,7 +17,7 @@
         <!-- color of Action Bar Menu Text-->
         <item name="android:actionMenuTextColor">#9E9E9E</item>
         <!-- color of Navigation Bar-->
-        <item name="@android:navigationBarColor">@android:color/transparent</item>
+        <item name="@android:navigationBarColor">@android:color/black</item>
 
 
         <!-- Main Elements -->

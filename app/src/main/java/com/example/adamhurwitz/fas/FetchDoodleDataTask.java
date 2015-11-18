@@ -25,10 +25,10 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
     public static final String FAS_API_BASE_URL = "https://fas-api.appspot.com/";
     public static final String SORT_PARAMETER = "sort_order";
     public static final String ID_PARAMETER = "item_id";
-    public static final String TITLE_PARAMETER = "name";
+    public static final String TITLE_PARAMETER = "title";
     public static final String RELEASE_DATE_PARAMETER = "release_date";
     public static final String DESCRIPTION_PARAMETER = "description";
-    public static final String PRICE_PARAMETER = "cost";
+    public static final String PRICE_PARAMETER = "price";
     public static final String IMAGE_URL_PARAMETER = "image_url";
 
     private ArrayList<DoodleData> mDoodleDataList = new ArrayList<>();
@@ -140,18 +140,12 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
             JSONArray doodlesInfo = new JSONArray(doodleDataJsonResponse);
             for (int index = 0; index < doodlesInfo.length(); index++) {
                 JSONObject doodleDataJson = doodlesInfo.getJSONObject(index);
-                DoodleData doodleData = new DoodleData("id",
+                DoodleData doodleData = new DoodleData(doodleDataJson.getString(ID_PARAMETER),
                         doodleDataJson.getString(TITLE_PARAMETER),
-                        "release_date",
+                        doodleDataJson.getString(RELEASE_DATE_PARAMETER),
                         doodleDataJson.getString(DESCRIPTION_PARAMETER),
                         doodleDataJson.getString(PRICE_PARAMETER),
                         doodleDataJson.getString(IMAGE_URL_PARAMETER));
-//                DoodleData doodleData = new DoodleData(doodleDataJson.getString(ID_PARAMETER),
-//                        doodleDataJson.getString(TITLE_PARAMETER),
-//                        doodleDataJson.getString(RELEASE_DATE_PARAMETER),
-//                        doodleDataJson.getString(DESCRIPTION_PARAMETER),
-//                        doodleDataJson.getString(PRICE_PARAMETER),
-//                        doodleDataJson.getString(IMAGE_URL_PARAMETER));
                 mDoodleDataList.add(doodleData);
             }
             return mDoodleDataList;
