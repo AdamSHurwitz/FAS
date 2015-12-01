@@ -1,5 +1,6 @@
 package com.example.adamhurwitz.fas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -59,12 +60,15 @@ public class MainActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.favorites_menu_itm:
-                                Toast.makeText(getApplicationContext(), "LAUNCH FAVORITES ACTIVITY",
-                                        Toast.LENGTH_SHORT).show();
+                                Intent favoriteIntent = new Intent(getApplicationContext(),
+                                        FavoritesActivity.class);
+                                startActivity(favoriteIntent);
+                                return true;
 
                             case R.id.cart_menu_itm:
-                                Toast.makeText(getApplicationContext(), "LAUNCH CART ACTIVITY",
-                                        Toast.LENGTH_SHORT).show();
+                                Intent cartItent = new Intent(getApplicationContext(),
+                                        CartActivity.class);
+                                startActivity(cartItent);
                                 return true;
 
                             default:

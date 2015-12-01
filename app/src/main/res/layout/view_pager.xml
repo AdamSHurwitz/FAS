@@ -22,16 +22,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <!-- Action Bar -->
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="snap"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <!-- How To Interact With Toolbar-->
-            <!-- app:layout_scrollFlags="scroll|enterAlways|snap" -->
+            <include layout="@layout/menu_bar" />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"

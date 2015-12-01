@@ -8,6 +8,7 @@ import android.os.Parcelable;
  * Object that contains information about each of the Google doodles.
  */
 public class DoodleData implements Parcelable {
+    // Initiate Attributes of Object
     private final String mId;
     private final String mTitle;
     private final String mReleaseDate;

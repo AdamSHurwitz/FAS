@@ -19,6 +19,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FavoritesActivity"
+            android:label="@string/favorites"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adamhurwitz.fas.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CartActivity"
+            android:label="@string/cart"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adamhurwitz.fas.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

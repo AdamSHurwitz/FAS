@@ -8,4 +8,6 @@
     <!-- DrawerView -->
     <color name="drawer_color">#FBE9E7</color>
     <color name="drawer_text_color">#424242</color>
+
+    <item name="status_bar" type="color">#9E9E9E</item>
 </resources>
