@@ -11,12 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+//TODO: Update with Vintage AsyncTask
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class VintageFragment extends Fragment {
 
-    private final Integer[] dummyData = {R.drawable.vintage1,R.drawable.vintage2,
+    private final Integer[] dummyData = {R.drawable.vintage1, R.drawable.vintage2,
             R.drawable.vintage3, R.drawable.vintage4, R.drawable.vintage5, R.drawable.vintage6,
             R.drawable.vintage7, R.drawable.vintage8, R.drawable.vintage9};
 
@@ -90,6 +92,7 @@ public class VintageFragment extends Fragment {
                 // ID of view item layout, not needed since we get it in getView()
                 R.layout.grid_item_layout);
 
+        //TODO: Add OnClickListeners To Populate DetailActivity + DetailFragment
 
         // Get a reference to GridView, and attach this adapter to it
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);

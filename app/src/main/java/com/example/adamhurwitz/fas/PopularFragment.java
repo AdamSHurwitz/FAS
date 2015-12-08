@@ -23,7 +23,6 @@ public class PopularFragment extends Fragment {
     /**
      * Empty constructor for the PopularFragment class.
      */
-    public PopularFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,9 +54,9 @@ public class PopularFragment extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            FetchDoodleDataTask movieTask = new FetchDoodleDataTask(mGridViewAdapter,
+            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(mGridViewAdapter,
                     mDoodleDataList);
-            movieTask.execute("popularity.desc");
+            doodleTask.execute("popularity.desc");
         }
     }
 }
