@@ -1,102 +1,82 @@
 package com.example.adamhurwitz.fas;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
-//TODO: Update with Vintage AsyncTask
+import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class VintageFragment extends Fragment {
 
-    private final Integer[] dummyData = {R.drawable.vintage1, R.drawable.vintage2,
-            R.drawable.vintage3, R.drawable.vintage4, R.drawable.vintage5, R.drawable.vintage6,
-            R.drawable.vintage7, R.drawable.vintage8, R.drawable.vintage9};
+    private ArrayList<DoodleData> doodleDataList = new ArrayList<>();
+    private GridViewAdapter mGridViewAdapter;
 
-    // used for Array of Integers when using dummy data
-    // private class GridViewAdapter extends ArrayAdapter<Integer> {
-    private class GridViewAdapter extends ArrayAdapter<Integer> {
-        private final String LOG_TAG = GridViewAdapter.class.getSimpleName();
-        // declare Context variable
-        Context context;
+    /**
+     * Empty constructor for the PopularFragment class.
+     */
 
-        /**
-         * @param context  is the Context
-         * @param resource is the grid_view_layout
-         */
-        // creates contructor to create GridViewAdapter object
-        public GridViewAdapter(Context context, int resource) {
-
-            super(context, resource, dummyData);
-            this.context = context;
-        }
-
-        // get view to create view, telling Adapter what's included in the grid_item_layout
-        @Override
-        public View getView(int position, View view, ViewGroup parent) {
-
-            // new method to only use memory when view is being used
-            // layout inflater
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-
-            // holder will hold the references to your views
-            ViewHolder holder;
-
-            // first clutter of views when nothing is loaded
-            if (view == null) {
-                // need inflator to inflate the grid_item_layout
-                view = inflater.inflate(R.layout.grid_item_layout, parent, false);
-                holder = new ViewHolder();
-                // once view is inflated we can grab elements, getting and saving grid_item_imageview
-                // as ImageView
-                holder.gridItem = (ImageView) view.findViewById(R.id.grid_item_imageview);
-                view.setTag(holder);
-                // if view is not empty, re-use view to repopulate w/ data
-            } else {
-                holder = (ViewHolder) view.getTag();
-            }
-
-            // use setter method setImageResource() to set ImageView image from dummyData Array
-            holder.gridItem.setImageResource(dummyData[position]);
-
-            return view;
-        }
-
-        class ViewHolder {
-            // declare your views here
-            ImageView gridItem;
-        }
-    }
-
-    private ArrayAdapter dummyDataAdapter;
-
-    // ArrayAdapter
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grid_view_layout, container, false);
 
-        dummyDataAdapter = new GridViewAdapter(
-                // current context (this fragment's containing activity)
-                getActivity(),
-                // ID of view item layout, not needed since we get it in getView()
-                R.layout.grid_item_layout);
+        mGridViewAdapter = new GridViewAdapter(getActivity(), R.layout.grid_item_layout,
+                doodleDataList);
 
-        //TODO: Add OnClickListeners To Populate DetailActivity + DetailFragment
-
-        // Get a reference to GridView, and attach this adapter to it
+        // Get a reference to the grid view layout and attach the adapter to it.
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
-        gridView.setAdapter(dummyDataAdapter);
+        gridView.setAdapter(mGridViewAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            // parent is parent view, view is grid_item view, position is grid_item position
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getActivity(),
+                        com.example.adamhurwitz.fas.DetailActivity.class);
+
+                /*String message = movieObjects.get(position).getTitle();
+                 intent.putExtra(EXTRA_MESSAGE, message);*/
+
+                intent.putExtra("Doodle Object", doodleDataList.get(position));
+
+                startActivity(intent);
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        doodleDataList.clear();
+        mGridViewAdapter.notifyDataSetChanged();
+        getDoodleData();
+    }
+
+    private void getDoodleData() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+
+        // Make sure that the device is actually connected to the internet before trying to get data
+        // about the Google doodles.
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(mGridViewAdapter,
+                    doodleDataList);
+            doodleTask.execute("release_date.desc", "vintage");
+        }
     }
 }

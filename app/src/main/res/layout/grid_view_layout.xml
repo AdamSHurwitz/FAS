@@ -10,7 +10,8 @@
         android:layout_height="match_parent"
         android:focusable="true"
         android:numColumns="auto_fit"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:paddingTop="50dp"/>
     <!--android:layout_margin="8dp"-->
     <!--android:background="@color/grid_view_color"-->
     <!--android:columnWidth="180dp"-->

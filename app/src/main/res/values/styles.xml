@@ -36,4 +36,10 @@
         <!--<item name="android:background">#FBE9E7</item>-->
     </style>
 
+    <!-- Detail View -->
+    <style name="AsyncTaskDetailView" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">#000</item>
+    </style>
+
+
 </resources>

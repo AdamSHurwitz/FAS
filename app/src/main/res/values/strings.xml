@@ -6,7 +6,8 @@
     <string name="title_section1">Popular</string>
     <string name="title_section2">Recent</string>
     <string name="title_section3">Vintage</string>
-    <string name="tab3_textview">Soy Renagado</string>
+    <string name="detail_view">Doodle Sticker</string>
+    <string name="about">About</string>
 
     <!-- Drawer View -->
     <string name="drawer_title">Menu</string>
