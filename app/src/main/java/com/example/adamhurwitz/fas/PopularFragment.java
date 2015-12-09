@@ -76,7 +76,7 @@ public class PopularFragment extends Fragment {
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(mGridViewAdapter,
                     doodleDataList);
-            doodleTask.execute("popularity.desc", "");
+            doodleTask.execute("popularity.desc", "popular");
         }
     }
 }

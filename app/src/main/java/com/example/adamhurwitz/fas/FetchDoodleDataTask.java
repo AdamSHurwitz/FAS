@@ -55,15 +55,27 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
         String doodleDataJsonResponse = null;
 
         try {
-            // Construct the URL to fetch data from and make the connection.
-            Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
-                    .appendQueryParameter(SORT_PARAMETER, params[0])
-                    .appendQueryParameter(params[1], "true")
-                    .build();
-            URL url = new URL(builtUri.toString());
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
+            if(params[1] != "popular") {
+                // Construct the URL to fetch data from and make the connection.
+                Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
+                        .appendQueryParameter(SORT_PARAMETER, params[0])
+                        .appendQueryParameter(params[1], "true")
+                        .build();
+                URL url = new URL(builtUri.toString());
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+            }
+
+            else{    // Construct the URL to fetch data from and make the connection.
+                Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
+                        .appendQueryParameter(SORT_PARAMETER, params[0])
+                        .build();
+                URL url = new URL(builtUri.toString());
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+            }
 
             // See if the input stream is not null and a connection could be made. If it is null, do
             // not process any further.
