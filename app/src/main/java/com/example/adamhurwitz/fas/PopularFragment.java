@@ -2,6 +2,8 @@ package com.example.adamhurwitz.fas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -12,15 +14,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import java.util.ArrayList;
+import com.example.adamhurwitz.fas.data.CursorContract;
+import com.example.adamhurwitz.fas.data.CursorDbHelper;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class PopularFragment extends Fragment {
 
-    private ArrayList<DoodleData> doodleDataList = new ArrayList<>();
-    private GridViewAdapter mGridViewAdapter;
+    private AsyncCursorAdapter asyncCursorAdapter;
+
+    /**
+     * Empty constructor for the AsyncParcelableFragment1() class.
+     */
+    public PopularFragment() {
+    }
 
     /**
      * Empty constructor for the PopularFragment class.
@@ -31,25 +39,68 @@ public class PopularFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grid_view_layout, container, false);
 
-        mGridViewAdapter = new GridViewAdapter(getActivity(), R.layout.grid_item_layout,
-                doodleDataList);
+        // Access database
+        CursorDbHelper mDbHelper = new CursorDbHelper(getContext());
+        // Gets the data repository in read mode
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                CursorContract.ProductData._ID + " DESC";
+
+        String[] returncolumns = {"CursorContract.ProductData.COLUMN_NAME_VINTAGE" ,
+                "CursorContract.ProductData.COLUMN_NAME_FAVORITE"};
+        String[] wherevalues = {"== 0 "};
+
+        // If you are querying entire table, can leave everything as Null
+        Cursor cursor = db.query(
+                CursorContract.ProductData.TABLE_NAME,  // The table to query
+                null, // The columns to return
+                null, // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+        /*Cursor cursor = db.query(
+                CursorContract.ProductData.TABLE_NAME,  // The table to query
+                null, // The columns to return
+                CursorContract.ProductData.COLUMN_NAME_VINTAGE + " AND " + CursorContract.ProductData.
+                        COLUMN_NAME_FAVORITE, // The columns for the WHERE clause
+                wherevalues,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );*/
+
+        asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), cursor, 0);
 
         // Get a reference to the grid view layout and attach the adapter to it.
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
-        gridView.setAdapter(mGridViewAdapter);
+        gridView.setAdapter(asyncCursorAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            // parent is parent view, view is grid_item view, position is grid_item position
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+                String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_ITEMID));
+                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_TITLE));
+                String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_IMAGEURL));
+                String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_DESCRIPTION));
+                String price = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_PRICE));
+                String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_RELEASEDATE));
+
+                String[] doodleDataItems = {item_id, title, image, description, price, release_date};
 
                 Intent intent = new Intent(getActivity(),
-                        com.example.adamhurwitz.fas.DetailActivity.class);
+                        DetailActivity.class);
 
-                /*String message = movieObjects.get(position).getTitle();
-                 intent.putExtra(EXTRA_MESSAGE, message);*/
-
-                intent.putExtra("Doodle Object", doodleDataList.get(position));
+                intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
 
                 startActivity(intent);
             }
@@ -61,8 +112,7 @@ public class PopularFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        doodleDataList.clear();
-        mGridViewAdapter.notifyDataSetChanged();
+        asyncCursorAdapter.notifyDataSetChanged();
         getDoodleData();
     }
 
@@ -74,8 +124,8 @@ public class PopularFragment extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(mGridViewAdapter,
-                    doodleDataList);
+            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(asyncCursorAdapter,
+                    getContext());
             doodleTask.execute("popularity.desc", "popular");
         }
     }

@@ -1,8 +1,15 @@
 package com.example.adamhurwitz.fas;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.adamhurwitz.fas.data.CursorContract;
+import com.example.adamhurwitz.fas.data.CursorDbHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,12 +21,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * An asynchronous task object to fetch data about the Google doodles.
  */
-public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<DoodleData>> {
+public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
 
     public static final String LOG_TAG = FetchDoodleDataTask.class.getSimpleName();
     public static final String FAS_API_BASE_URL = "https://fas-api.appspot.com/";
@@ -28,25 +34,29 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
     public static final String TITLE_PARAMETER = "title";
     public static final String RELEASE_DATE_PARAMETER = "release_date";
     public static final String DESCRIPTION_PARAMETER = "description";
+    public static final String SEARCH_STRINGS = "search_strings";
     public static final String PRICE_PARAMETER = "price";
     public static final String IMAGE_URL_PARAMETER = "image_url";
+    public static final String POPULARITY = "popularity";
+    public static final String IS_RECENT_BOOLEAN = "recent";
+    public static final String IS_VINTAGE_BOOLEAN = "vintage";
 
-    private ArrayList<DoodleData> mDoodleDataList = new ArrayList<>();
-    private GridViewAdapter mGridViewAdapter;
+    private AsyncCursorAdapter asyncCursorAdapter;
+    private final Context context;
 
     /**
-     * Constructor for the FetchDoodleDataTask object.
-     * @param gridViewAdapter An adapter to recycle items correctly in the grid view.
-     * @param doodleDataList A list of objects with information about Google doodles.
+     * Constructor for the AsyncParcelableFetchDoodleDataTask object.
+     *
+     * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
+     * @param context            Context of Activity
      */
-    public FetchDoodleDataTask(GridViewAdapter gridViewAdapter,
-                               ArrayList<DoodleData> doodleDataList) {
-        this.mDoodleDataList = doodleDataList;
-        this.mGridViewAdapter = gridViewAdapter;
+    public FetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
+        this.asyncCursorAdapter = asyncCursorAdapter;
+        this.context = context;
     }
 
     @Override
-    protected ArrayList<DoodleData> doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -55,7 +65,7 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
         String doodleDataJsonResponse = null;
 
         try {
-            if(params[1] != "popular") {
+            if (params[1] != "popular") {
                 // Construct the URL to fetch data from and make the connection.
                 Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_PARAMETER, params[0])
@@ -65,9 +75,7 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
-            }
-
-            else{    // Construct the URL to fetch data from and make the connection.
+            } else {    // Construct the URL to fetch data from and make the connection.
                 Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_PARAMETER, params[0])
                         .build();
@@ -122,7 +130,8 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
         try {
             Log.i(LOG_TAG, "The Google doodle data that was returned is: " +
                     doodleDataJsonResponse);
-            return parseDoodleDataJsonResponse(doodleDataJsonResponse);
+            parseDoodleDataJsonResponse(doodleDataJsonResponse);
+            return null;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -138,35 +147,103 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
      * so that the items in the grid view can appropriately reflect the changes.
      * @param doodleData A list of objects with information about the Google doodles.
      */
-    public void onPostExecute(ArrayList<DoodleData> doodleData) {
-        mGridViewAdapter.notifyDataSetChanged();
+    public void onPostExecute(Void param) {
+        asyncCursorAdapter.notifyDataSetChanged();
     }
 
     /**
      * Parses the JSON response for information about the Google doodles.
+     *
      * @param doodleDataJsonResponse A JSON string which needs to be parsed for data about the
      *                               Google doodles.
      */
     //TODO: Add Cursor Adapter
-    private ArrayList<DoodleData> parseDoodleDataJsonResponse(String doodleDataJsonResponse)
+    private void parseDoodleDataJsonResponse(String doodleDataJsonResponse)
             throws JSONException {
         try {
             JSONArray doodlesInfo = new JSONArray(doodleDataJsonResponse);
             for (int index = 0; index < doodlesInfo.length(); index++) {
                 JSONObject doodleDataJson = doodlesInfo.getJSONObject(index);
-                DoodleData doodleData = new DoodleData(doodleDataJson.getString(ID_PARAMETER),
+                putDoodleDataIntoDb(
+                        doodleDataJson.getString(ID_PARAMETER),
                         doodleDataJson.getString(TITLE_PARAMETER),
                         doodleDataJson.getString(RELEASE_DATE_PARAMETER),
                         doodleDataJson.getString(DESCRIPTION_PARAMETER),
-                        doodleDataJson.getString(PRICE_PARAMETER),
-                        doodleDataJson.getString(IMAGE_URL_PARAMETER));
-                mDoodleDataList.add(doodleData);
+                        doodleDataJson.getString(SEARCH_STRINGS),
+                        doodleDataJson.getInt(PRICE_PARAMETER),
+                        doodleDataJson.getString(IMAGE_URL_PARAMETER),
+                        doodleDataJson.getDouble(POPULARITY),
+                        doodleDataJson.getBoolean(IS_RECENT_BOOLEAN),
+                        doodleDataJson.getBoolean(IS_VINTAGE_BOOLEAN));
             }
-            return mDoodleDataList;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
-            return null;
+        }
+    }
+
+    public void putDoodleDataIntoDb(String item_id, String title, String date, String description,
+                                    String search_strings, int price, String image,
+                                    Double popularity, Boolean recent, Boolean vintage) {
+        Log.v("putInfoIntoDatabase", "called here");
+
+        // Access database
+        CursorDbHelper mDbHelper = new CursorDbHelper(context);
+
+        // Put Info into Database
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(CursorContract.ProductData.COLUMN_NAME_ITEMID, item_id);
+        values.put(CursorContract.ProductData.COLUMN_NAME_TITLE, title);
+        values.put(CursorContract.ProductData.COLUMN_NAME_RELEASEDATE, date);
+        values.put(CursorContract.ProductData.COLUMN_NAME_DESCRIPTION, description);
+        values.put(CursorContract.ProductData.COLUMN_NAME_SEARCHSTRINGS, search_strings);
+        values.put(CursorContract.ProductData.COLUMN_NAME_PRICE, price);
+        values.put(CursorContract.ProductData.COLUMN_NAME_IMAGEURL, image);
+        values.put(CursorContract.ProductData.COLUMN_NAME_DESCRIPTION, description);
+        values.put(CursorContract.ProductData.COLUMN_NAME_POPULARITY, popularity);
+        values.put(CursorContract.ProductData.COLUMN_NAME_RECENT, recent);
+        values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                CursorContract.ProductData._ID + " DESC";
+        String whereValue[] = {item_id};
+
+        // Insert the new row, returning the primary key value of the new row
+        long thisRowID;
+
+        // If you are querying entire table, can leave everything as Null
+        // Querying when Item ID Exists
+        Cursor cursor = db.query(
+                CursorContract.ProductData.TABLE_NAME,  // The table to query
+                null,                                // The columns to return
+                CursorContract.ProductData.COLUMN_NAME_ITEMID + "= ?", // The columns for the WHERE clause
+                whereValue, // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        // If the Item ID Does Not Exist, Insert All Values
+        if (cursor.getCount() == 0) {
+            thisRowID = db.insert(
+                    CursorContract.ProductData.TABLE_NAME,
+                    null,
+                    values);
+        }
+
+        // If the Item ID Does Exist, Update All Values
+        else {
+            thisRowID = db.update(
+                    CursorContract.ProductData.TABLE_NAME,
+                    values,
+                    CursorContract.ProductData.COLUMN_NAME_ITEMID + "= ?",
+                    whereValue);
         }
     }
 }

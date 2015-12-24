@@ -29,12 +29,18 @@ public class DetailFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         if (intent != null) {
 
-            DoodleData doodleData = intent.getParcelableExtra("Doodle Object");
+            String[] doodleDataElements = intent.getStringArrayExtra("Cursor Doodle Attributes");
+            // doodleDataElements[0] = item_id
+            // doodleDataElements[1] = title
+            // doodleDataElements[2] = image
+            // doodleDataElements[3] = description
+            // doodleDataElements[4] = price
+            // doodleDataElements[5] = release_date
 
             // Create DoodleData Within 'detail_fragment_layout.xml'
             ImageView doodle_image = (ImageView) view.findViewById(R.id.detail_doodle_image);
 
-            final String imageUrl = doodleData.getImageUrl();
+            final String imageUrl = doodleDataElements[2];
 
             // generate images with Picasso
             // switch this to getActivity() since must get Context from Activity
@@ -48,19 +54,19 @@ public class DetailFragment extends Fragment {
 
             //Create Doodle Title within 'detail_fragment_layout.xml'
             TextView title = (TextView) view.findViewById(R.id.detail_title);
-            title.setText(doodleData.getTitle());
+            title.setText(doodleDataElements[1]);
 
             //Create Doodle Title within 'detail_fragment_layout.xml'
             TextView price = (TextView) view.findViewById(R.id.detail_price);
-            price.setText("$" + doodleData.getPrice());
+            price.setText("$" + doodleDataElements[4]);
 
             //Create MovieData User Release Date Within 'fragment_detail.xml'
             TextView releaseDate = (TextView) view.findViewById(R.id.detail_releasedate);
-            releaseDate.setText("Released: " + doodleData.getReleaseDate());
+            releaseDate.setText("Released: " + doodleDataElements[5]);
 
             //Create MovieData User Rating Within 'fragment_detail.xml'
             TextView about = (TextView) view.findViewById(R.id.detail_description);
-            about.setText(doodleData.getDescription());
+            about.setText(doodleDataElements[3]);
 
         }
         return view;
