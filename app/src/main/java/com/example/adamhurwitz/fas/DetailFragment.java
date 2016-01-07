@@ -1,22 +1,28 @@
 package com.example.adamhurwitz.fas;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.adamhurwitz.fas.data.CursorContract;
+import com.example.adamhurwitz.fas.data.CursorDbHelper;
 import com.squareup.picasso.Picasso;
 
 /**
+ * DetailFragment class implementation.
  * Created by adamhurwitz on 12/5/15.
  */
 public class DetailFragment extends Fragment {
-
-
     public DetailFragment() {
     }
 
@@ -25,11 +31,14 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_layout, container, false);
         //receive the intent
+
+        final ImageButton favoriteButton = (ImageButton) view.findViewById(R.id.favorite_button);
+
         //Activity has intent, must get intent from Activity
         Intent intent = getActivity().getIntent();
         if (intent != null) {
 
-            String[] doodleDataElements = intent.getStringArrayExtra("Cursor Doodle Attributes");
+            final String[] doodleDataElements = intent.getStringArrayExtra("Cursor Doodle Attributes");
             // doodleDataElements[0] = item_id
             // doodleDataElements[1] = title
             // doodleDataElements[2] = image
@@ -67,6 +76,47 @@ public class DetailFragment extends Fragment {
             //Create MovieData User Rating Within 'fragment_detail.xml'
             TextView about = (TextView) view.findViewById(R.id.detail_description);
             about.setText(doodleDataElements[3]);
+
+            if (doodleDataElements[6].equals("2")) {
+                favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+            } else {
+                favoriteButton.setImageResource(R.drawable.star_default_18dp);
+            }
+
+            favoriteButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
+                    SQLiteDatabase sqliteDatabase = cursorDbHelper.getWritableDatabase();
+                    Cursor cursor = sqliteDatabase.query(
+                            CursorContract.ProductData.TABLE_NAME, null,
+                            CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                            new String[]{doodleDataElements[1]}, null, null,
+                            CursorContract.ProductData._ID + " DESC");
+                    ContentValues values = new ContentValues();
+
+                    if (doodleDataElements[6].equals("1")) {
+                        favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                        if (cursor.moveToFirst()) {
+                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                        }
+                    } else {
+                        favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                        if (cursor.moveToFirst()) {
+                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                        }
+                    }
+
+                    sqliteDatabase.update(
+                            CursorContract.ProductData.TABLE_NAME, values,
+                            CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                            new String[]{doodleDataElements[1]});
+                    cursor.close();
+                }
+            });
+
+
+
+
 
         }
         return view;

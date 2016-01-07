@@ -20,5 +20,13 @@
             android:layout_height="wrap_content"
             android:text="@string/favorites" />
 
+        <GridView
+            android:id="@+id/grid_view_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:numColumns="auto_fit"
+            android:clickable="true"
+            android:paddingTop="50dp"/>
     </LinearLayout>
 </LinearLayout>

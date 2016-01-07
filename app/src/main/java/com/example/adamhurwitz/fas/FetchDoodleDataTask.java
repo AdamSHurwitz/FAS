@@ -65,7 +65,7 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
         String doodleDataJsonResponse = null;
 
         try {
-            if (params[1] != "popular") {
+            if (!params[1].equals("popular")) {
                 // Construct the URL to fetch data from and make the connection.
                 Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_PARAMETER, params[0])
@@ -208,6 +208,7 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
         values.put(CursorContract.ProductData.COLUMN_NAME_POPULARITY, popularity);
         values.put(CursorContract.ProductData.COLUMN_NAME_RECENT, recent);
         values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
+        values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, "1");
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -231,19 +232,8 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
 
         // If the Item ID Does Not Exist, Insert All Values
         if (cursor.getCount() == 0) {
-            thisRowID = db.insert(
-                    CursorContract.ProductData.TABLE_NAME,
-                    null,
-                    values);
+            db.insert(CursorContract.ProductData.TABLE_NAME, null, values);
         }
 
-        // If the Item ID Does Exist, Update All Values
-        else {
-            thisRowID = db.update(
-                    CursorContract.ProductData.TABLE_NAME,
-                    values,
-                    CursorContract.ProductData.COLUMN_NAME_ITEMID + "= ?",
-                    whereValue);
-        }
     }
 }

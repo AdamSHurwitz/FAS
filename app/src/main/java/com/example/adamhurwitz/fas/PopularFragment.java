@@ -47,9 +47,7 @@ public class PopularFragment extends Fragment {
         String sortOrder =
                 CursorContract.ProductData._ID + " DESC";
 
-        String[] returncolumns = {"CursorContract.ProductData.COLUMN_NAME_VINTAGE" ,
-                "CursorContract.ProductData.COLUMN_NAME_FAVORITE"};
-        String[] wherevalues = {"0", "0"};
+        String[] whereValues = {"0", "0"};
 
         // If you are querying entire table, can leave everything as Null
         Cursor cursor = db.query(
@@ -57,13 +55,14 @@ public class PopularFragment extends Fragment {
                 null, // The columns to return
                 CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND " + CursorContract.ProductData.
                         COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
-                wherevalues,                            // The values for the WHERE clause
+                whereValues,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
 
         asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), cursor, 0);
+        cursor.close();
 
         // Get a reference to the grid view layout and attach the adapter to it.
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
@@ -85,8 +84,11 @@ public class PopularFragment extends Fragment {
                         .COLUMN_NAME_PRICE));
                 String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_RELEASEDATE));
+                String favorite = cursor.getString(cursor.getColumnIndex((
+                        CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
 
-                String[] doodleDataItems = {item_id, title, image, description, price, release_date};
+                String[] doodleDataItems = {item_id, title, image, description, price, release_date,
+                                            favorite};
 
                 Intent intent = new Intent(getActivity(),
                         DetailActivity.class);
