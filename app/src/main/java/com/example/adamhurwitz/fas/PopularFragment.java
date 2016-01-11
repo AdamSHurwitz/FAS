@@ -62,7 +62,6 @@ public class PopularFragment extends Fragment {
         );
 
         asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), cursor, 0);
-        cursor.close();
 
         // Get a reference to the grid view layout and attach the adapter to it.
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
