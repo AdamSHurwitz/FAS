@@ -10,11 +10,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -32,7 +30,7 @@ public class FavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.favorites_layout);
+        setContentView(R.layout.favorites_grid_item_layout);
 
         // Status Bar: Add Color
         Window window = getWindow();
@@ -111,71 +109,6 @@ public class FavoritesActivity extends AppCompatActivity {
         // If your minSdkVersion is 11 or higher, instead use:
         //getActionBar().setDisplayHomeAsUpEnabled(true);
 
-    }
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grid_view_layout, container, false);
-
-        // Access database
-        CursorDbHelper mDbHelper = new CursorDbHelper(getApplicationContext());
-        // Gets the data repository in read mode
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                CursorContract.ProductData._ID + " DESC";
-
-        String[] whereValues = {"0", "0"};
-
-        // If you are querying entire table, can leave everything as Null
-        Cursor cursor = db.query(
-                CursorContract.ProductData.TABLE_NAME,  // The table to query
-                null, // The columns to return
-                CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND " + CursorContract.ProductData.
-                        COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
-                whereValues,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
-        );
-
-        asyncCursorAdapter = new AsyncCursorAdapter(this, cursor, 0);
-
-        // Get a reference to the grid view layout and attach the adapter to it.
-        GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
-        gridView.setAdapter(asyncCursorAdapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-                String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_ITEMID));
-                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_TITLE));
-                String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_IMAGEURL));
-                String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_DESCRIPTION));
-                String price = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_PRICE));
-                String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_RELEASEDATE));
-                String favorite = cursor.getString(cursor.getColumnIndex((
-                        CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
-
-                String[] doodleDataItems = {item_id, title, image, description, price, release_date,
-                        favorite};
-
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-
-                intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
-
-                startActivity(intent);
-            }
-        });
-
-        return view;
     }
 
     @Override

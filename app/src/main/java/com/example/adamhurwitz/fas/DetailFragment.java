@@ -114,11 +114,6 @@ public class DetailFragment extends Fragment {
                     cursor.close();
                 }
             });
-
-
-
-
-
         }
         return view;
     }
