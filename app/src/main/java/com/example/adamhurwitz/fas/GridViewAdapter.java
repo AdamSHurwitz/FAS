@@ -53,7 +53,7 @@ public class GridViewAdapter extends ArrayAdapter<DoodleData> {
         // When loading the view for the first time actually create it, instead of trying to pull
         // a recycled version of the view.
         if (view == null) {
-            view = inflater.inflate(R.layout.grid_item_layout, parent, false);
+            view = inflater.inflate(R.layout.griditem_layout, parent, false);
             viewHolder = new ViewHolder();
 
             // After the view is inflated, set different layouts for what the view should contain

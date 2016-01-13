@@ -37,7 +37,7 @@ public class RecentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grid_view_layout, container, false);
+        View view = inflater.inflate(R.layout.gridview_layout, container, false);
 
         // Access database
         CursorDbHelper mDbHelper = new CursorDbHelper(getContext());

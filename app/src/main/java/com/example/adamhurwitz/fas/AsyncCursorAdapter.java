@@ -51,7 +51,7 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
         ViewHolder holder;
 
         // Inflating new view for our layout
-        View view = inflater.inflate(R.layout.grid_item_layout, parent, false);
+        View view = inflater.inflate(R.layout.griditem_layout, parent, false);
         holder = new ViewHolder();
 
         // Once view is inflated we can grab elements, getting and saving grid_item_imageview
