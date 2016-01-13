@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.data.CursorContract;
 import com.example.adamhurwitz.fas.data.CursorDbHelper;
@@ -98,11 +97,13 @@ public class DetailFragment extends Fragment {
                         favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
                         if (cursor.moveToFirst()) {
                             values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                            doodleDataElements[6] = "2";
                         }
                     } else {
                         favoriteButton.setImageResource(R.drawable.star_default_18dp);
                         if (cursor.moveToFirst()) {
                             values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                            doodleDataElements[6] = "1";
                         }
                     }
 
