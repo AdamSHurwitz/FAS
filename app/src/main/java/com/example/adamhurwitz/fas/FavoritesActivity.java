@@ -67,6 +67,9 @@ public class FavoritesActivity extends AppCompatActivity {
         GridView gridView = (GridView) this.findViewById(R.id.grid_view_layout);
         gridView.setAdapter(asyncCursorAdapter);
 
+       /* asyncCursorAdapter.changeCursor(cursor);
+        asyncCursorAdapter.notifyDataSetChanged();*/
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -136,6 +139,28 @@ public class FavoritesActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
-        asyncCursorAdapter.notifyDataSetChanged();
+        CursorDbHelper mDbHelper = new CursorDbHelper(getApplicationContext());
+        // Gets the data repository in read mode
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = CursorContract.ProductData._ID + " DESC";
+
+        // If you are querying entire table, can leave everything as Null
+        Cursor cursor = db.query(
+                CursorContract.ProductData.TABLE_NAME,  // The table to query
+                null, // The columns to return
+                CursorContract.ProductData.COLUMN_NAME_FAVORITE + " = ?",
+                new String[]{"2"},                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        asyncCursorAdapter = new AsyncCursorAdapter(this, cursor, 0);
+
+        // Get a reference to the grid view layout and attach the adapter to it.
+        GridView gridView = (GridView) this.findViewById(R.id.grid_view_layout);
+        gridView.setAdapter(asyncCursorAdapter);
+
     }
 }
