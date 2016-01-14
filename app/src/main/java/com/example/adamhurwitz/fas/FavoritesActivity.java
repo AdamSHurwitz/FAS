@@ -131,6 +131,11 @@ public class FavoritesActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        asyncCursorAdapter.notifyDataSetChanged();
     }
 }

@@ -85,7 +85,7 @@ public class DetailFragment extends Fragment {
             favoriteButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
-                    SQLiteDatabase sqliteDatabase = cursorDbHelper.getWritableDatabase();
+                    SQLiteDatabase sqliteDatabase = cursorDbHelper.getReadableDatabase();
                     Cursor cursor = sqliteDatabase.query(
                             CursorContract.ProductData.TABLE_NAME, null,
                             CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
@@ -95,16 +95,14 @@ public class DetailFragment extends Fragment {
 
                     if (doodleDataElements[6].equals("1")) {
                         favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
-                        if (cursor.moveToFirst()) {
+                        cursor.moveToFirst();
                             values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
                             doodleDataElements[6] = "2";
-                        }
                     } else {
                         favoriteButton.setImageResource(R.drawable.star_default_18dp);
-                        if (cursor.moveToFirst()) {
+                        cursor.moveToFirst();
                             values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
                             doodleDataElements[6] = "1";
-                        }
                     }
 
                     sqliteDatabase.update(
