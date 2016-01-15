@@ -1,5 +1,6 @@
 package com.example.adamhurwitz.fas;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.data.CursorContract;
 import com.example.adamhurwitz.fas.data.CursorDbHelper;
@@ -25,25 +28,19 @@ public class PopularFragment extends Fragment {
     private AsyncCursorAdapter asyncCursorAdapter;
 
     /**
-     * Empty constructor for the AsyncParcelableFragment1() class.
+     * Empty constructor for the PopularFragment class.
      */
     public PopularFragment() {
     }
 
-    String doodleTitle;
-    String doodleFavorite;
-
-    /**
-     * Empty constructor for the PopularFragment class.
-     */
+    String doodleTitle = "";
+    String doodleFavortie = "";
+    Cursor itemCursor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gridview_layout, container, false);
-
-        /*final ImageButton favoriteButton = (ImageButton) view.findViewById(
-                R.id.gridItem_favorite_button);*/
 
         // Access database
         CursorDbHelper mDbHelper = new CursorDbHelper(getContext());
@@ -73,10 +70,16 @@ public class PopularFragment extends Fragment {
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
         gridView.setAdapter(asyncCursorAdapter);
 
+        //TODO: Fix favorite btn on Main Views and Favorite View
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final ImageView favoriteButton = (ImageView) view.findViewById(
+                        R.id.gridItem_favorite_button);
+
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+                itemCursor = cursor;
                 String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_ITEMID));
                 String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
@@ -92,7 +95,7 @@ public class PopularFragment extends Fragment {
                         .COLUMN_NAME_RELEASEDATE));
                 String favorite = cursor.getString(cursor.getColumnIndex((
                         CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
-                doodleFavorite = favorite;
+                doodleFavortie = favorite;
 
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date,
                         favorite};
@@ -103,40 +106,75 @@ public class PopularFragment extends Fragment {
                 intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
 
                 startActivity(intent);
-            }
-        });
 
-        /*favoriteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                favoriteButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "MEOW", Toast.LENGTH_SHORT).show();
+
+                        CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
+                        SQLiteDatabase db = cursorDbHelper.getReadableDatabase();
+                        Cursor cursor = db.query(
+                                CursorContract.ProductData.TABLE_NAME, null,
+                                CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                                new String[]{doodleTitle}, null, null,
+                                CursorContract.ProductData._ID + " DESC");
+
+                        ContentValues values = new ContentValues();
+
+                        if (doodleFavortie.equals("1")) {
+                            favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                            cursor.moveToFirst();
+                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                        } else if (doodleFavortie.equals("2")){
+                            favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                            cursor.moveToFirst();
+                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                        }
+
+                        db.update(
+                                CursorContract.ProductData.TABLE_NAME, values,
+                                CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                                new String[]{doodleTitle});
+                        //cursor.close();
+                    }
+                });
+
+                //TODO: Figure out how to add favorite button to main views
+        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final ImageView favoriteButton = (ImageView) view.findViewById(
+                        R.id.gridItem_favorite_button);
+
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
-                SQLiteDatabase sqliteDatabase = cursorDbHelper.getReadableDatabase();
-                Cursor cursor = sqliteDatabase.query(
-                        CursorContract.ProductData.TABLE_NAME, null,
-                        CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                        new String[]{doodleTitle}, null, null,
-                        CursorContract.ProductData._ID + " DESC");
+                SQLiteDatabase db = cursorDbHelper.getReadableDatabase();
+                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_TITLE));
+                String favorite = cursor.getString(cursor.getColumnIndex((
+                        CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
                 ContentValues values = new ContentValues();
 
-                if (doodleFavorite.equals("1")) {
+                if (favorite.equals("1")) {
                     favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
                     cursor.moveToFirst();
                     values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
-                    doodleFavorite = "2";
-                } else {
+                } else if (favorite.equals("2")){
                     favoriteButton.setImageResource(R.drawable.star_default_18dp);
                     cursor.moveToFirst();
                     values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
-                    doodleFavorite = "1";
+
                 }
 
-                sqliteDatabase.update(
+                db.update(
                         CursorContract.ProductData.TABLE_NAME, values,
                         CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                        new String[]{doodleTitle});
+                        new String[]{title});
                 cursor.close();
-            }
-        });*/
+            }*/
 
+            }
+        });
         return view;
     }
 
