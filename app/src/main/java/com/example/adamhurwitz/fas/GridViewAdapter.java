@@ -75,5 +75,6 @@ public class GridViewAdapter extends ArrayAdapter<DoodleData> {
      */
     class ViewHolder {
         ImageView imageView;
+        ImageView favoriteGridBtn;
     }
 }

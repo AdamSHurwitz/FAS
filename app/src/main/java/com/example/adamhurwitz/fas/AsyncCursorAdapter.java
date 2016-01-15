@@ -23,7 +23,7 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
      *
      * @param context The context in which this adapter is called.
      * @param cursor  Cursor from which to get the data
-     * @param flags Determine behavior of adapter
+     * @param flags   Determine behavior of adapter
      */
     // creates constructor to create StaticArrayAdapter object
     public AsyncCursorAdapter(Context context, Cursor cursor, int flags) {
@@ -58,6 +58,7 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
         // as ImageView
         holder.gridItem = (ImageView) view.findViewById(R.id.grid_item_imageview);
         view.setTag(holder);
+        holder.favoriteGridBtn = (ImageView) view.findViewById(R.id.gridItem_favorite_button);
 
         return view;
     }
@@ -75,10 +76,12 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
         ViewHolder holder = (ViewHolder) view.getTag();
         Picasso.with(context).load(imageURL).noFade()
                 .into(holder.gridItem);
+        holder.favoriteGridBtn.setImageResource(R.drawable.star_default_18dp);
     }
 
     class ViewHolder {
         // declare your views here
         ImageView gridItem;
+        ImageView favoriteGridBtn;
     }
 }

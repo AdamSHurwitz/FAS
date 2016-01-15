@@ -30,6 +30,9 @@ public class PopularFragment extends Fragment {
     public PopularFragment() {
     }
 
+    String doodleTitle;
+    String doodleFavorite;
+
     /**
      * Empty constructor for the PopularFragment class.
      */
@@ -38,6 +41,9 @@ public class PopularFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gridview_layout, container, false);
+
+        /*final ImageButton favoriteButton = (ImageButton) view.findViewById(
+                R.id.gridItem_favorite_button);*/
 
         // Access database
         CursorDbHelper mDbHelper = new CursorDbHelper(getContext());
@@ -75,6 +81,7 @@ public class PopularFragment extends Fragment {
                         .COLUMN_NAME_ITEMID));
                 String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_TITLE));
+                doodleTitle = title;
                 String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_IMAGEURL));
                 String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
@@ -85,9 +92,10 @@ public class PopularFragment extends Fragment {
                         .COLUMN_NAME_RELEASEDATE));
                 String favorite = cursor.getString(cursor.getColumnIndex((
                         CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
+                doodleFavorite = favorite;
 
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date,
-                                            favorite};
+                        favorite};
 
                 Intent intent = new Intent(getActivity(),
                         DetailActivity.class);
@@ -97,6 +105,37 @@ public class PopularFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        /*favoriteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
+                SQLiteDatabase sqliteDatabase = cursorDbHelper.getReadableDatabase();
+                Cursor cursor = sqliteDatabase.query(
+                        CursorContract.ProductData.TABLE_NAME, null,
+                        CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                        new String[]{doodleTitle}, null, null,
+                        CursorContract.ProductData._ID + " DESC");
+                ContentValues values = new ContentValues();
+
+                if (doodleFavorite.equals("1")) {
+                    favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                    cursor.moveToFirst();
+                    values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                    doodleFavorite = "2";
+                } else {
+                    favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                    cursor.moveToFirst();
+                    values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                    doodleFavorite = "1";
+                }
+
+                sqliteDatabase.update(
+                        CursorContract.ProductData.TABLE_NAME, values,
+                        CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                        new String[]{doodleTitle});
+                cursor.close();
+            }
+        });*/
 
         return view;
     }
