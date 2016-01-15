@@ -70,8 +70,7 @@ public class PopularFragment extends Fragment {
         GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
         gridView.setAdapter(asyncCursorAdapter);
 
-        //TODO: Fix favorite btn on Main Views and Favorite View
-
+        //TODO: Add favorite button to main views
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -138,41 +137,6 @@ public class PopularFragment extends Fragment {
                         //cursor.close();
                     }
                 });
-
-                //TODO: Figure out how to add favorite button to main views
-        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final ImageView favoriteButton = (ImageView) view.findViewById(
-                        R.id.gridItem_favorite_button);
-
-                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-                CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
-                SQLiteDatabase db = cursorDbHelper.getReadableDatabase();
-                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
-                        .COLUMN_NAME_TITLE));
-                String favorite = cursor.getString(cursor.getColumnIndex((
-                        CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
-                ContentValues values = new ContentValues();
-
-                if (favorite.equals("1")) {
-                    favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
-                    cursor.moveToFirst();
-                    values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
-                } else if (favorite.equals("2")){
-                    favoriteButton.setImageResource(R.drawable.star_default_18dp);
-                    cursor.moveToFirst();
-                    values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
-
-                }
-
-                db.update(
-                        CursorContract.ProductData.TABLE_NAME, values,
-                        CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                        new String[]{title});
-                cursor.close();
-            }*/
-
             }
         });
         return view;

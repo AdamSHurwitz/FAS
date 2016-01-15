@@ -76,7 +76,9 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
         ViewHolder holder = (ViewHolder) view.getTag();
         Picasso.with(context).load(imageURL).noFade()
                 .into(holder.gridItem);
+        //TODO: Add logic for favorite grid item
         holder.favoriteGridBtn.setImageResource(R.drawable.star_default_18dp);
+        //holder.favoriteGridBtn.setImageResource(R.drawable.star_pressed_18dp);
     }
 
     class ViewHolder {

@@ -157,7 +157,6 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
      * @param doodleDataJsonResponse A JSON string which needs to be parsed for data about the
      *                               Google doodles.
      */
-    //TODO: Add Cursor Adapter
     private void parseDoodleDataJsonResponse(String doodleDataJsonResponse)
             throws JSONException {
         try {
