@@ -32,6 +32,7 @@ public class DetailFragment extends Fragment {
         //receive the intent
 
         final ImageButton favoriteButton = (ImageButton) view.findViewById(R.id.favorite_button);
+        String favVal = "";
 
         //Activity has intent, must get intent from Activity
         Intent intent = getActivity().getIntent();
@@ -76,7 +77,24 @@ public class DetailFragment extends Fragment {
             TextView about = (TextView) view.findViewById(R.id.detail_description);
             about.setText(doodleDataElements[3]);
 
-            if (doodleDataElements[6].equals("2")) {
+            CursorDbHelper helper = new CursorDbHelper(getContext());
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            Cursor c = db.query(CursorContract.ProductData.TABLE_NAME,
+                    new String[] {CursorContract.ProductData.COLUMN_NAME_FAVORITE},
+                    CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                    new String[] {doodleDataElements[1]},
+                    null,
+                    null,
+                    CursorContract.ProductData._ID);
+
+            if (c != null) {
+                c.moveToFirst();
+                favVal = c.getString(
+                        c.getColumnIndexOrThrow(CursorContract.ProductData.COLUMN_NAME_FAVORITE));
+            }
+
+            if (favVal.equals("2")) {
                 favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
             } else {
                 favoriteButton.setImageResource(R.drawable.star_default_18dp);
@@ -87,7 +105,8 @@ public class DetailFragment extends Fragment {
                     CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
                     SQLiteDatabase sqliteDatabase = cursorDbHelper.getReadableDatabase();
                     Cursor cursor = sqliteDatabase.query(
-                            CursorContract.ProductData.TABLE_NAME, null,
+                            CursorContract.ProductData.TABLE_NAME,
+                            new String[] {CursorContract.ProductData.COLUMN_NAME_FAVORITE},
                             CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
                             new String[]{doodleDataElements[1]}, null, null,
                             CursorContract.ProductData._ID + " DESC");

@@ -1,6 +1,5 @@
 package com.example.adamhurwitz.fas;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.data.CursorContract;
 import com.example.adamhurwitz.fas.data.CursorDbHelper;
@@ -106,7 +104,7 @@ public class PopularFragment extends Fragment {
 
                 startActivity(intent);
 
-                favoriteButton.setOnClickListener(new View.OnClickListener() {
+               /* favoriteButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Toast.makeText(getContext(), "MEOW", Toast.LENGTH_SHORT).show();
 
@@ -136,7 +134,7 @@ public class PopularFragment extends Fragment {
                                 new String[]{doodleTitle});
                         //cursor.close();
                     }
-                });
+                });*/
             }
         });
         return view;
