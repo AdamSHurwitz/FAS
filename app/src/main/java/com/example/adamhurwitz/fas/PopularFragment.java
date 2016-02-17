@@ -7,6 +7,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +22,7 @@ import com.example.adamhurwitz.fas.data.Contract;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PopularFragment extends Fragment {
+public class PopularFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private AsyncCursorAdapter asyncCursorAdapter;
 
@@ -32,26 +35,21 @@ public class PopularFragment extends Fragment {
     String doodleTitle = "";
     String doodleFavortie = "";
     Cursor itemCursor;
+    private static final int LOADER_FRAGMENT = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gridview_layout, container, false);
 
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                Contract.ProductData._ID + " DESC";
-
-        String[] whereValues = {"0", "0"};
-
         // If you are querying entire table, can leave everything as Null
         Cursor cursor = getContext().getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
-                Contract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND " + Contract.ProductData.
-                        COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
-                whereValues,                            // The values for the WHERE clause
-                sortOrder                                 // The sort order
+                Contract.ProductData.COLUMN_NAME_VINTAGE + "= ? AND "
+                        + Contract.ProductData.COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
+                new String[] {"0", "0"},                            // The values for the WHERE clause
+                Contract.ProductData._ID + " DESC"                                 // The sort order
         );
 
         asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), cursor, 0);
@@ -152,4 +150,31 @@ public class PopularFragment extends Fragment {
             doodleTask.execute("popularity.desc", "popular");
         }
     }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new CursorLoader(getActivity(),
+                Contract.ProductData.CONTENT_URI, null,
+                Contract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                        + Contract.ProductData.COLUMN_NAME_RECENT + " = ?",
+                new String[] {"0","0"}, Contract.ProductData.COLUMN_NAME_POPULARITY + " DESC");
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        asyncCursorAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        asyncCursorAdapter.swapCursor(null);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(LOADER_FRAGMENT, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+
 }

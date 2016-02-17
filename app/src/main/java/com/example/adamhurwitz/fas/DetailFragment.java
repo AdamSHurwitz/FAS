@@ -120,7 +120,7 @@ public class DetailFragment extends Fragment {
                             Contract.ProductData.CONTENT_URI, values,
                             Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
                             new String[]{doodleDataElements[1]});
-                    cursor.close();
+                    //cursor.close();
                 }
             });
         }
