@@ -3,13 +3,11 @@ package com.example.adamhurwitz.fas;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.adamhurwitz.fas.data.CursorContract;
-import com.example.adamhurwitz.fas.data.CursorDbHelper;
+import com.example.adamhurwitz.fas.data.Contract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Vector;
 
 /**
  * An asynchronous task object to fetch data about the Google doodles.
@@ -41,16 +40,19 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
     public static final String IS_RECENT_BOOLEAN = "recent";
     public static final String IS_VINTAGE_BOOLEAN = "vintage";
 
-    private AsyncCursorAdapter asyncCursorAdapter;
     private final Context context;
+    private AsyncCursorAdapter asyncCursorAdapter;
+    Vector<ContentValues> cVVector;
+
+    String mParams1;
 
     /**
      * Constructor for the AsyncParcelableFetchDoodleDataTask object.
      *
-     * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
      * @param context            Context of Activity
+     * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
      */
-    public FetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
+    public FetchDoodleDataTask(Context context, AsyncCursorAdapter asyncCursorAdapter) {
         this.asyncCursorAdapter = asyncCursorAdapter;
         this.context = context;
     }
@@ -58,6 +60,7 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... params) {
 
+        mParams1 = params[1];
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -141,16 +144,6 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
         return null;
     }
 
-    @Override
-    /**
-     * Override the onPostExecute method to notify the grid view adapter that new data was received
-     * so that the items in the grid view can appropriately reflect the changes.
-     * @param doodleData A list of objects with information about the Google doodles.
-     */
-    public void onPostExecute(Void param) {
-        asyncCursorAdapter.notifyDataSetChanged();
-    }
-
     /**
      * Parses the JSON response for information about the Google doodles.
      *
@@ -161,6 +154,8 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
             throws JSONException {
         try {
             JSONArray doodlesInfo = new JSONArray(doodleDataJsonResponse);
+            // Initialize ArrayList of Content Values size of data Array length
+            cVVector = new Vector<>(doodlesInfo.length());
             for (int index = 0; index < doodlesInfo.length(); index++) {
                 JSONObject doodleDataJson = doodlesInfo.getJSONObject(index);
                 putDoodleDataIntoDb(
@@ -186,53 +181,108 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, Void> {
                                     Double popularity, Boolean recent, Boolean vintage) {
         Log.v("putInfoIntoDatabase", "called here");
 
-        // Access database
-        CursorDbHelper mDbHelper = new CursorDbHelper(context);
-
-        // Put Info into Database
-
-        // Gets the data repository in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(CursorContract.ProductData.COLUMN_NAME_ITEMID, item_id);
-        values.put(CursorContract.ProductData.COLUMN_NAME_TITLE, title);
-        values.put(CursorContract.ProductData.COLUMN_NAME_RELEASEDATE, date);
-        values.put(CursorContract.ProductData.COLUMN_NAME_DESCRIPTION, description);
-        values.put(CursorContract.ProductData.COLUMN_NAME_SEARCHSTRINGS, search_strings);
-        values.put(CursorContract.ProductData.COLUMN_NAME_PRICE, price);
-        values.put(CursorContract.ProductData.COLUMN_NAME_IMAGEURL, image);
-        values.put(CursorContract.ProductData.COLUMN_NAME_DESCRIPTION, description);
-        values.put(CursorContract.ProductData.COLUMN_NAME_POPULARITY, popularity);
-        values.put(CursorContract.ProductData.COLUMN_NAME_RECENT, recent);
-        values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
-        values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, "1");
+        values.put(Contract.ProductData.COLUMN_NAME_ITEMID, item_id);
+        values.put(Contract.ProductData.COLUMN_NAME_TITLE, title);
+        values.put(Contract.ProductData.COLUMN_NAME_RELEASEDATE, date);
+        values.put(Contract.ProductData.COLUMN_NAME_DESCRIPTION, description);
+        values.put(Contract.ProductData.COLUMN_NAME_SEARCHSTRINGS, search_strings);
+        values.put(Contract.ProductData.COLUMN_NAME_PRICE, price);
+        values.put(Contract.ProductData.COLUMN_NAME_IMAGEURL, image);
+        values.put(Contract.ProductData.COLUMN_NAME_DESCRIPTION, description);
+        values.put(Contract.ProductData.COLUMN_NAME_POPULARITY, popularity);
+        values.put(Contract.ProductData.COLUMN_NAME_RECENT, recent);
+        values.put(Contract.ProductData.COLUMN_NAME_VINTAGE, vintage);
+        values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, "1");
 
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                CursorContract.ProductData._ID + " DESC";
-        String whereValue[] = {item_id};
+        cVVector.add(values);
 
         // Insert the new row, returning the primary key value of the new row
         long thisRowID;
 
         // If you are querying entire table, can leave everything as Null
         // Querying when Item ID Exists
-        Cursor cursor = db.query(
-                CursorContract.ProductData.TABLE_NAME,  // The table to query
+        Cursor cursor = context.getContentResolver().query(
+                Contract.ProductData.CONTENT_URI,  // The table to query
                 null,                                // The columns to return
-                CursorContract.ProductData.COLUMN_NAME_ITEMID + "= ?", // The columns for the WHERE clause
-                whereValue, // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
+                Contract.ProductData.COLUMN_NAME_ITEMID + "= ?", // The columns for the WHERE clause
+                new String[] {item_id}, // The values for the WHERE clause
+                Contract.ProductData._ID + " DESC"                                 // The sort order
         );
 
+       /* if (cursor.getCount() == 0) {
+            if (cVVector.size() > 0) {
+                ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                cVVector.toArray(cvArray);
+                context.getContentResolver().bulkInsert(Contract.ProductData.CONTENT_URI, cvArray);
+            }
+        }*/
         // If the Item ID Does Not Exist, Insert All Values
         if (cursor.getCount() == 0) {
-            db.insert(CursorContract.ProductData.TABLE_NAME, null, values);
+            Uri uri;
+            uri = context.getContentResolver().insert(
+                    Contract.ProductData.CONTENT_URI, values);
         }
 
+    }
+    @Override
+    /**
+     * Override the onPostExecute method to notify the grid view adapter that new data was received
+     * so that the items in the grid view can appropriately reflect the changes.
+     * @param doodleData A list of objects with information about the Google doodles.
+     */
+    public void onPostExecute(Void param) {
+        String whereColumns = "";
+        // The values for the WHERE clause
+        String[] whereValues = {"0", "0"};
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = "";
+
+        whereColumns = Contract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                + Contract.ProductData.COLUMN_NAME_RECENT + " = ?";
+
+        switch (mParams1) {
+            case "popular":
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = Contract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                break;
+            case "recent":
+                whereValues[0] = "0";
+                whereValues[1] = "1";
+                sortOrder = Contract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                .show();*/
+                break;
+            case "vintage":
+                whereValues[0] = "1";
+                whereValues[1] = "0";
+                sortOrder = Contract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                /*Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                .show();*/
+                break;
+            default:
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = Contract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
+                .show();*/
+                break;
+        }
+        Cursor cursor = context.getContentResolver().query(
+                // The table to query
+                Contract.ProductData.CONTENT_URI,
+                // The columns to return
+                null,
+                // The columns for the WHERE clause
+                whereColumns,
+                // The values for the WHERE clause
+                whereValues,
+                // The sort order
+                sortOrder
+        );
+        asyncCursorAdapter  .changeCursor(cursor);
+        asyncCursorAdapter.notifyDataSetChanged();
     }
 }

@@ -4,24 +4,25 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.adamhurwitz.fas.data.CursorContract.ProductData;
+import com.example.adamhurwitz.fas.data.Contract.ProductData;
 
 /**
  * Manages a local database.
  */
-public class CursorDbHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
 
-    static final String DATABASE_NAME = "doodle_products.db";
+    static final String DATABASE_NAME = "contentprovider_doodle_products.db";
 
-    public CursorDbHelper(Context context) {
+    public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_PRODUCTTABLE = "CREATE TABLE " + ProductData.TABLE_NAME + "(" +
+        final String SQL_CREATE_PRODUCTTABLE = "CREATE TABLE " + Contract
+                .ProductData.TABLE_NAME + "(" +
                 // AutoIncrement
                 ProductData._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ProductData.COLUMN_NAME_DESCRIPTION + " TEXT, " +

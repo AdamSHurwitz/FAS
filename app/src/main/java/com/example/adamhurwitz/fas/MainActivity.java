@@ -1,5 +1,6 @@
 package com.example.adamhurwitz.fas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.stetho.DumperPluginsProvider;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.dumpapp.DumperPlugin;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     // DrawerView: Initialize DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -24,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Stetho
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(new SampleDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build());
 
         // DrawerView: Build Action Bar - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -150,5 +164,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    // Create class for Stetho
+    private static class SampleDumperPluginsProvider implements DumperPluginsProvider {
+        private final Context mContext;
+
+        public SampleDumperPluginsProvider(Context context){mContext = context;}
+
+        @Override
+        public Iterable<DumperPlugin> get() {
+            ArrayList<DumperPlugin> plugins = new ArrayList<>();
+            for (DumperPlugin defaultPlugin : Stetho.defaultDumperPluginsProvider(mContext).get()) {
+                plugins.add(defaultPlugin);
+            }
+            //plugins.add(new SyncAdapterFragment());
+            return plugins;
+        }
     }
 }

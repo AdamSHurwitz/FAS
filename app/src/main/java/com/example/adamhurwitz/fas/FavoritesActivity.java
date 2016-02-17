@@ -2,7 +2,6 @@ package com.example.adamhurwitz.fas;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -18,8 +17,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.adamhurwitz.fas.data.CursorContract;
-import com.example.adamhurwitz.fas.data.CursorDbHelper;
+import com.example.adamhurwitz.fas.data.Contract;
 
 
 public class FavoritesActivity extends AppCompatActivity {
@@ -52,20 +50,20 @@ public class FavoritesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-                String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String item_id = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_ITEMID));
-                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String title = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_TITLE));
-                String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String image = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_IMAGEURL));
-                String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String description = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_DESCRIPTION));
-                String price = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String price = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_PRICE));
-                String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String release_date = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_RELEASEDATE));
                 String favorite = cursor.getString(cursor.getColumnIndex((
-                        CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
+                        Contract.ProductData.COLUMN_NAME_FAVORITE)));
 
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date,
                         favorite};
@@ -117,21 +115,14 @@ public class FavoritesActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
-        CursorDbHelper mDbHelper = new CursorDbHelper(getApplicationContext());
-        // Gets the data repository in read mode
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder = CursorContract.ProductData._ID + " DESC";
 
         // If you are querying entire table, can leave everything as Null
-        Cursor cursor = db.query(
-                CursorContract.ProductData.TABLE_NAME,  // The table to query
+        Cursor cursor = this.getContentResolver().query(
+                Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
-                CursorContract.ProductData.COLUMN_NAME_FAVORITE + " = ?",
+                Contract.ProductData.COLUMN_NAME_FAVORITE + " = ?",
                 new String[]{"2"},                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
+                Contract.ProductData._ID + " DESC"      // The sort order
         );
 
         asyncCursorAdapter = new AsyncCursorAdapter(this, cursor, 0);

@@ -3,7 +3,6 @@ package com.example.adamhurwitz.fas;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,8 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.adamhurwitz.fas.data.CursorContract;
-import com.example.adamhurwitz.fas.data.CursorDbHelper;
+import com.example.adamhurwitz.fas.data.Contract;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -77,21 +75,16 @@ public class DetailFragment extends Fragment {
             TextView about = (TextView) view.findViewById(R.id.detail_description);
             about.setText(doodleDataElements[3]);
 
-            CursorDbHelper helper = new CursorDbHelper(getContext());
-            SQLiteDatabase db = helper.getWritableDatabase();
-
-            Cursor c = db.query(CursorContract.ProductData.TABLE_NAME,
-                    new String[] {CursorContract.ProductData.COLUMN_NAME_FAVORITE},
-                    CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                    new String[] {doodleDataElements[1]},
-                    null,
-                    null,
-                    CursorContract.ProductData._ID);
+            Cursor c = getContext().getContentResolver().query(Contract.ProductData.CONTENT_URI,
+                    new String[]{Contract.ProductData.COLUMN_NAME_FAVORITE},
+                    Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                    new String[]{doodleDataElements[1]},
+                    Contract.ProductData._ID);
 
             if (c != null) {
                 c.moveToFirst();
                 favVal = c.getString(
-                        c.getColumnIndexOrThrow(CursorContract.ProductData.COLUMN_NAME_FAVORITE));
+                        c.getColumnIndexOrThrow(Contract.ProductData.COLUMN_NAME_FAVORITE));
             }
 
             if (favVal.equals("2")) {
@@ -102,31 +95,30 @@ public class DetailFragment extends Fragment {
 
             favoriteButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
-                    SQLiteDatabase sqliteDatabase = cursorDbHelper.getReadableDatabase();
-                    Cursor cursor = sqliteDatabase.query(
-                            CursorContract.ProductData.TABLE_NAME,
-                            new String[] {CursorContract.ProductData.COLUMN_NAME_FAVORITE},
-                            CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                            new String[]{doodleDataElements[1]}, null, null,
-                            CursorContract.ProductData._ID + " DESC");
+                    Cursor cursor = getContext().getContentResolver().query(
+                            Contract.ProductData.CONTENT_URI,
+                            new String[]{Contract.ProductData.COLUMN_NAME_FAVORITE},
+                            Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                            new String[]{doodleDataElements[1]},
+                            Contract.ProductData._ID + " DESC");
                     ContentValues values = new ContentValues();
 
                     if (doodleDataElements[6].equals("1")) {
                         favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
                         cursor.moveToFirst();
-                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                            values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 2);
                             doodleDataElements[6] = "2";
                     } else {
                         favoriteButton.setImageResource(R.drawable.star_default_18dp);
                         cursor.moveToFirst();
-                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                            values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 1);
                             doodleDataElements[6] = "1";
                     }
 
-                    sqliteDatabase.update(
-                            CursorContract.ProductData.TABLE_NAME, values,
-                            CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                    int rowsUpdated;
+                    rowsUpdated = getContext().getContentResolver().update(
+                            Contract.ProductData.CONTENT_URI, values,
+                            Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
                             new String[]{doodleDataElements[1]});
                     cursor.close();
                 }

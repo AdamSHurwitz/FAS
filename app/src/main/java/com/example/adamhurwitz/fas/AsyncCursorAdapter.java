@@ -3,14 +3,12 @@ package com.example.adamhurwitz.fas;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.adamhurwitz.fas.data.CursorContract;
-import com.example.adamhurwitz.fas.data.CursorDbHelper;
+import com.example.adamhurwitz.fas.data.Contract;
 import com.squareup.picasso.Picasso;
 
 
@@ -64,13 +62,8 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
     }
 
     public void bindView(View view, Context context, Cursor cursor) {
-        // Access database
-        CursorDbHelper mDbHelper = new CursorDbHelper(context);
-        // Gets the data repository in read mode
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
         String imageURL = cursor.getString(
-                cursor.getColumnIndexOrThrow(CursorContract.ProductData.COLUMN_NAME_IMAGEURL));
+                cursor.getColumnIndexOrThrow(Contract.ProductData.COLUMN_NAME_IMAGEURL));
 
         // Holder for a view
         ViewHolder holder = (ViewHolder) view.getTag();

@@ -43,6 +43,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adamhurwitz.fas.MainActivity" />
         </activity>
+        <provider
+            android:authorities="com.example.adamhurwitz.fas"
+            android:name=".data.Provider"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>

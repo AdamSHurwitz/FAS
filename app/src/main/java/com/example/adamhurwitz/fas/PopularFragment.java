@@ -3,7 +3,6 @@ package com.example.adamhurwitz.fas;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,8 +14,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.adamhurwitz.fas.data.CursorContract;
-import com.example.adamhurwitz.fas.data.CursorDbHelper;
+import com.example.adamhurwitz.fas.data.Contract;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -40,25 +38,19 @@ public class PopularFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gridview_layout, container, false);
 
-        // Access database
-        CursorDbHelper mDbHelper = new CursorDbHelper(getContext());
-        // Gets the data repository in read mode
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                CursorContract.ProductData._ID + " DESC";
+                Contract.ProductData._ID + " DESC";
 
         String[] whereValues = {"0", "0"};
 
         // If you are querying entire table, can leave everything as Null
-        Cursor cursor = db.query(
-                CursorContract.ProductData.TABLE_NAME,  // The table to query
+        Cursor cursor = getContext().getContentResolver().query(
+                Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
-                CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND " + CursorContract.ProductData.
+                Contract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND " + Contract.ProductData.
                         COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
                 whereValues,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
 
@@ -77,21 +69,21 @@ public class PopularFragment extends Fragment {
 
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 itemCursor = cursor;
-                String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String item_id = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_ITEMID));
-                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String title = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_TITLE));
                 doodleTitle = title;
-                String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String image = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_IMAGEURL));
-                String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String description = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_DESCRIPTION));
-                String price = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String price = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_PRICE));
-                String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                String release_date = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_RELEASEDATE));
                 String favorite = cursor.getString(cursor.getColumnIndex((
-                        CursorContract.ProductData.COLUMN_NAME_FAVORITE)));
+                        Contract.ProductData.COLUMN_NAME_FAVORITE)));
                 doodleFavortie = favorite;
 
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date,
@@ -155,8 +147,8 @@ public class PopularFragment extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(asyncCursorAdapter,
-                    getContext());
+            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(getContext(),
+                    asyncCursorAdapter);
             doodleTask.execute("popularity.desc", "popular");
         }
     }
