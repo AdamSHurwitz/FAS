@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.adamhurwitz.fas.data.Contract;
+import com.example.adamhurwitz.fas.service.Service;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -144,9 +145,9 @@ public class RecentFragment extends Fragment implements LoaderManager.LoaderCall
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(getContext(),
-                    asyncCursorAdapter);
-            doodleTask.execute("release_date.desc", "recent");
+            String[] serviceArray = {"release_date.desc", "recent"};
+            getActivity().startService(new Intent(getContext(), Service.class)
+                    .putExtra("service_extra", serviceArray));
         }
     }
 
