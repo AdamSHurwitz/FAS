@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.example.adamhurwitz.fas.FetchDoodleDataTask;
 import com.example.adamhurwitz.fas.data.Contract;
 
 import org.json.JSONArray;
@@ -29,7 +28,7 @@ public class Service extends IntentService {
         super("Service");
     }
 
-    public static final String LOG_TAG = FetchDoodleDataTask.class.getSimpleName();
+    public static final String LOG_TAG = Service.class.getSimpleName();
     public static final String FAS_API_BASE_URL = "https://fas-api.appspot.com/";
     public static final String SORT_PARAMETER = "sort_order";
     public static final String ID_PARAMETER = "item_id";
