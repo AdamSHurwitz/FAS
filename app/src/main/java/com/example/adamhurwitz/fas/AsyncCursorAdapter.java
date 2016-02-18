@@ -56,7 +56,7 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
         // as ImageView
         holder.gridItem = (ImageView) view.findViewById(R.id.grid_item_imageview);
         view.setTag(holder);
-        holder.favoriteGridBtn = (ImageView) view.findViewById(R.id.gridItem_favorite_button);
+        //holder.favoriteGridBtn = (ImageView) view.findViewById(R.id.gridItem_favorite_button);
 
         return view;
     }
@@ -70,13 +70,12 @@ public class AsyncCursorAdapter extends android.widget.CursorAdapter {
         Picasso.with(context).load(imageURL).noFade()
                 .into(holder.gridItem);
         //TODO: Add logic for favorite grid item
-        holder.favoriteGridBtn.setImageResource(R.drawable.star_default_18dp);
-        //holder.favoriteGridBtn.setImageResource(R.drawable.star_pressed_18dp);
+        //holder.favoriteGridBtn.setImageResource(R.drawable.star_default_18dp);
     }
 
     class ViewHolder {
         // declare your views here
         ImageView gridItem;
-        ImageView favoriteGridBtn;
+        //ImageView favoriteGridBtn;
     }
 }
