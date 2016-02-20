@@ -7,15 +7,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.example.adamhurwitz.fas.data.Contract;
 import com.example.adamhurwitz.fas.service.Service;
@@ -23,9 +19,10 @@ import com.example.adamhurwitz.fas.service.Service;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PopularFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+//public class PopularFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class PopularFragment extends Fragment {
 
-    private AsyncCursorAdapter asyncCursorAdapter;
+    //private AsyncCursorAdapter asyncCursorAdapter;
 
     /**
      * Empty constructor for the PopularFragment class.
@@ -33,34 +30,30 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
     public PopularFragment() {
     }
 
-    String doodleTitle = "";
-    String doodleFavortie = "";
-    Cursor itemCursor;
-    private static final int LOADER_FRAGMENT = 0;
+        /* String doodleTitle = "";
+        String doodleFavortie = "";
+        Cursor itemCursor;*/
+    Cursor cursor;
+    //private static final int LOADER_FRAGMENT = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.gridview_layout, container, false);
-
-        // If you are querying entire table, can leave everything as Null
-        Cursor cursor = getContext().getContentResolver().query(
+        cursor = getContext().getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
                 Contract.ProductData.COLUMN_NAME_VINTAGE + "= ? AND "
                         + Contract.ProductData.COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
-                new String[] {"0", "0"},                            // The values for the WHERE clause
+                new String[]{"0", "0"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
 
-        asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), cursor, 0);
-
-        // Get a reference to the grid view layout and attach the adapter to it.
-        GridView gridView = (GridView) view.findViewById(R.id.grid_view_layout);
-        gridView.setAdapter(asyncCursorAdapter);
+        RecyclerView rv = (RecyclerView) inflater.inflate(
+                R.layout.recycler_layout, container, false);
+        setupRecyclerView(rv);
 
         //TODO: Add favorite button to main views
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final ImageView favoriteButton = (ImageView) view.findViewById(
@@ -95,7 +88,7 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
 
                 startActivity(intent);
 
-               /* favoriteButton.setOnClickListener(new View.OnClickListener() {
+               *//* favoriteButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Toast.makeText(getContext(), "MEOW", Toast.LENGTH_SHORT).show();
 
@@ -125,16 +118,30 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
                                 new String[]{doodleTitle});
                         //cursor.close();
                     }
-                });*/
+                });*//*
             }
-        });
-        return view;
+        });*/
+        //return view;
+        return rv;
     }
+
+    // helper method to create LayoutManager and Adapter
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        // set LinearLayoutManager
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // set GridLayoutManager
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        recyclerView.setAdapter(new MyListCursorAdapter(
+                getActivity(),
+                cursor));
+    }
+
 
     @Override
     public void onStart() {
         super.onStart();
-        asyncCursorAdapter.notifyDataSetChanged();
         getDoodleData();
     }
 
@@ -149,33 +156,13 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
             String[] serviceArray = {"popularity.desc", "popular"};
             getActivity().startService(new Intent(getContext(), Service.class)
                     .putExtra("service_extra", serviceArray));
+
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(),
-                Contract.ProductData.CONTENT_URI, null,
-                Contract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
-                        + Contract.ProductData.COLUMN_NAME_RECENT + " = ?",
-                new String[] {"0","0"}, Contract.ProductData.COLUMN_NAME_POPULARITY + " DESC");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        asyncCursorAdapter.swapCursor(cursor);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        asyncCursorAdapter.swapCursor(null);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(LOADER_FRAGMENT, null, this);
-        super.onActivityCreated(savedInstanceState);
-    }
-
-
+    /*@Override
+    public void onResume(){
+        super.onResume();
+        getDoodleData();
+    }*/
 }
