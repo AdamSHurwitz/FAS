@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,14 @@ public class PopularFragment extends Fragment {
         /* String doodleTitle = "";
         String doodleFavortie = "";
         Cursor itemCursor;*/
+    private final String LOG_TAG = PopularFragment.class.getSimpleName();
     Cursor cursor;
     //private static final int LOADER_FRAGMENT = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getDoodleData();
         cursor = getContext().getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
@@ -47,6 +50,7 @@ public class PopularFragment extends Fragment {
                 new String[]{"0", "0"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
+        Log.v(LOG_TAG, "onCreateView() - " + cursor.getCount());
 
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.recycler_layout, container, false);
@@ -130,6 +134,15 @@ public class PopularFragment extends Fragment {
         // set LinearLayoutManager
         //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        cursor = getContext().getContentResolver().query(
+                Contract.ProductData.CONTENT_URI,  // The table to query
+                null, // The columns to return
+                Contract.ProductData.COLUMN_NAME_VINTAGE + "= ? AND "
+                        + Contract.ProductData.COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
+                new String[]{"0", "0"},                            // The values for the WHERE clause
+                Contract.ProductData._ID + " DESC"                                 // The sort order
+        );
+        Log.v(LOG_TAG,"setupRecyclerView() - cursor count: "+cursor.getCount());
         // set GridLayoutManager
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -139,11 +152,10 @@ public class PopularFragment extends Fragment {
     }
 
 
-    @Override
+   /* @Override
     public void onStart() {
         super.onStart();
-        getDoodleData();
-    }
+    }*/
 
     private void getDoodleData() {
         ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -156,13 +168,15 @@ public class PopularFragment extends Fragment {
             String[] serviceArray = {"popularity.desc", "popular"};
             getActivity().startService(new Intent(getContext(), Service.class)
                     .putExtra("service_extra", serviceArray));
-
         }
+        cursor = getContext().getContentResolver().query(
+                Contract.ProductData.CONTENT_URI,  // The table to query
+                null, // The columns to return
+                Contract.ProductData.COLUMN_NAME_VINTAGE + "= ? AND "
+                        + Contract.ProductData.COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
+                new String[]{"0", "0"},                            // The values for the WHERE clause
+                Contract.ProductData._ID + " DESC"                                 // The sort order
+        );
+        Log.v(LOG_TAG,"getDoodleData() - cursor count "+cursor.getCount());
     }
-
-    /*@Override
-    public void onResume(){
-        super.onResume();
-        getDoodleData();
-    }*/
 }
