@@ -31,12 +31,18 @@ public class PopularFragment extends Fragment {
     public PopularFragment() {
     }
 
-        /* String doodleTitle = "";
-        String doodleFavortie = "";
-        Cursor itemCursor;*/
+    /* String doodleTitle = "";
+    String doodleFavortie = "";
+    Cursor itemCursor;*/
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
     Cursor cursor;
+    Context context;
     //private static final int LOADER_FRAGMENT = 0;
+
+    /*public void setCursorOnAttach() {
+        context = getContext();
+        onAttach(context);
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,7 +148,7 @@ public class PopularFragment extends Fragment {
                 new String[]{"0", "0"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
-        Log.v(LOG_TAG,"setupRecyclerView() - cursor count: "+cursor.getCount());
+        Log.v(LOG_TAG, "setupRecyclerView() - cursor count: " + cursor.getCount());
         // set GridLayoutManager
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -177,6 +183,6 @@ public class PopularFragment extends Fragment {
                 new String[]{"0", "0"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
-        Log.v(LOG_TAG,"getDoodleData() - cursor count "+cursor.getCount());
+        Log.v(LOG_TAG, "getDoodleData() - cursor count " + cursor.getCount());
     }
 }
