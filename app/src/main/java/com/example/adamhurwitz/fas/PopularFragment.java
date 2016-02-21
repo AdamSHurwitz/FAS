@@ -157,12 +157,6 @@ public class PopularFragment extends Fragment {
                 cursor));
     }
 
-
-   /* @Override
-    public void onStart() {
-        super.onStart();
-    }*/
-
     private void getDoodleData() {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
