@@ -54,9 +54,9 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
                 .into(viewHolder.mImage);
 
         final String title = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_TITLE));
-        final String price = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_TITLE));
-        final String releaseDate = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_TITLE));
-        final String description = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_TITLE));
+        final String price = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_PRICE));
+        final String releaseDate = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_RELEASEDATE));
+        final String description = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_DESCRIPTION));
         final String favorite = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_FAVORITE));
 
         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
