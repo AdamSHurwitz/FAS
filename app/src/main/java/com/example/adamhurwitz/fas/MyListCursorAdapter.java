@@ -28,13 +28,11 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public ImageView mImage;
-        //public TextView mTitle;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mImage = (ImageView) view.findViewById(R.id.recycler_item_image);
-            //mTitle = (TextView) view.findViewById(R.id.detail_title);
         }
     }
 
@@ -48,13 +46,10 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
-        //RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         final MyListItem myListItem = MyListItem.fromCursor(cursor);
-        // viewHolder.mImageView.setText(myListItem.getUrl());
 
         final String imageUrl = myListItem.getImageUrl();
 
-        //ViewHolder holder = (ViewHolder) view.getTag();
         Picasso.with(mContext).load(myListItem.getImageUrl()).noFade()
                 .into(viewHolder.mImage);
 
@@ -63,16 +58,6 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
         final String releaseDate = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_TITLE));
         final String description = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_TITLE));
         final String favorite = cursor.getString(cursor.getColumnIndex(Contract.ProductData.COLUMN_NAME_FAVORITE));
-
-        /*String title = myListItem.getTitle();
-        Log.v(LOG_TAG, "onBindViewHolder() - title " + title);*/
-
-
-        /*final String image = myListItem.getImageUrl();
-        final String title = myListItem.getTitle();
-        final String price = myListItem.getPrice();
-        final String releaseDate = myListItem.getReleaseDate();
-        final String description = myListItem.getDescription();*/
 
         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
