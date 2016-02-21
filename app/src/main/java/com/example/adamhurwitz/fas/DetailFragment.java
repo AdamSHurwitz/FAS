@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
  */
 public class DetailFragment extends Fragment {
     private final String LOG_TAG = DetailFragment.class.getSimpleName();
+
     public DetailFragment() {
     }
 
@@ -56,7 +57,7 @@ public class DetailFragment extends Fragment {
 
             // generate images with Picasso
             // switch this to getActivity() since must get Context from Activity
-            Log.v(LOG_TAG,"onCreateView() - imageUrl "+imageUrl);
+            Log.v(LOG_TAG, "onCreateView() - imageUrl " + imageUrl);
             Picasso.with(getActivity())
                     .load(imageUrl)
                     .resize(1200, 500)
@@ -81,17 +82,16 @@ public class DetailFragment extends Fragment {
             TextView about = (TextView) view.findViewById(R.id.detail_description);
             about.setText(detailArray[4]);
 
-            /*Cursor c = getContext().getContentResolver().query(Contract.ProductData.CONTENT_URI,
+            Cursor c = getContext().getContentResolver().query(Contract.ProductData.CONTENT_URI,
                     new String[]{Contract.ProductData.COLUMN_NAME_FAVORITE},
                     Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                    new String[]{doodleDataElements[1]},
+                    new String[]{detailArray[1]},
                     Contract.ProductData._ID);
-*/
-            /*if (c != null) {
+            if (c != null) {
                 c.moveToFirst();
                 favVal = c.getString(
                         c.getColumnIndexOrThrow(Contract.ProductData.COLUMN_NAME_FAVORITE));
-            }*/
+            }
 
             if (favVal.equals("2")) {
                 favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
@@ -112,12 +112,12 @@ public class DetailFragment extends Fragment {
                     if (detailArray[5].equals("1")) {
                         favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
                         cursor.moveToFirst();
-                            values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 2);
-                        detailArray[5]= "2";
+                        values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                        detailArray[5] = "2";
                     } else {
                         favoriteButton.setImageResource(R.drawable.star_default_18dp);
                         cursor.moveToFirst();
-                            values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                        values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 1);
                         detailArray[5] = "1";
                     }
 

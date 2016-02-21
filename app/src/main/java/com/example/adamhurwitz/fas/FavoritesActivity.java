@@ -50,8 +50,6 @@ public class FavoritesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-                String item_id = cursor.getString(cursor.getColumnIndex(Contract.ProductData
-                        .COLUMN_NAME_ITEMID));
                 String title = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                         .COLUMN_NAME_TITLE));
                 String image = cursor.getString(cursor.getColumnIndex(Contract.ProductData
@@ -65,16 +63,20 @@ public class FavoritesActivity extends AppCompatActivity {
                 String favorite = cursor.getString(cursor.getColumnIndex((
                         Contract.ProductData.COLUMN_NAME_FAVORITE)));
 
-                String[] doodleDataItems = {item_id, title, image, description, price, release_date,
-                        favorite};
 
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                String[] detailArray = {image, title, price, release_date,
+                        description, favorite};
+                startActivity(new Intent(getApplicationContext(), DetailActivity.class)
+                        .putExtra("recylerAdapterExtra", detailArray));
+                Log.v(LOG_TAG, "onClick() - title " + title);
+            }
+        });
+
+                /*Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
 
                 intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
 
-                startActivity(intent);
-            }
-        });
+                startActivity(intent);*/
 
 
         // Back Button To Go Home
@@ -113,7 +115,7 @@ public class FavoritesActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         // If you are querying entire table, can leave everything as Null
