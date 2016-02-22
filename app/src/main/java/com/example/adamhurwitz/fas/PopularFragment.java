@@ -33,7 +33,6 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
     MyListCursorAdapter recyclerAdapter;
 
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
-    Cursor cursor;
     private static final int LOADER_FRAGMENT = 0;
 
     @Override
@@ -43,6 +42,11 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
 
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.recycler_layout, container, false);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        rv.setHasFixedSize(true);
+
         setupRecyclerView(rv);
 
         return rv;
@@ -53,7 +57,7 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
         // set LinearLayoutManager
         //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        cursor = getContext().getContentResolver().query(
+        Cursor cursor = getContext().getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
                 Contract.ProductData.COLUMN_NAME_VINTAGE + "= ? AND "

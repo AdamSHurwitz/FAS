@@ -21,7 +21,7 @@ import com.example.adamhurwitz.fas.data.Contract;
 
 
 public class CartActivity extends AppCompatActivity {
-    public static final String LOG_TAG = FavoritesActivity.class.getSimpleName();
+    public static final String LOG_TAG = CartActivity.class.getSimpleName();
     private AsyncCursorAdapter asyncCursorAdapter;
 
     @Override
