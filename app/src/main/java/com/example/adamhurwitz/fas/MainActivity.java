@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         adapter.addFragment(new PopularFragment(), "Popular");
-        /*adapter.addFragment(new RecentFragment(), "Recent");
-        adapter.addFragment(new VintageFragment(), "Vintage");*/
+        adapter.addFragment(new RecentFragment(), "Recent");
+        adapter.addFragment(new VintageFragment(), "Vintage");
         viewPager.setAdapter(adapter);
     }
     // ---------------------------------------------------------------------------------------------

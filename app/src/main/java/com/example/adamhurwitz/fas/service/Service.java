@@ -1,3 +1,4 @@
+/*
 package com.example.adamhurwitz.fas.service;
 
 import android.app.IntentService;
@@ -20,9 +21,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+*/
 /**
  * Created by adamhurwitz on 1/17/16.
- */
+ *//*
+
 public class Service extends IntentService {
     public Service() {
         super("Service");
@@ -132,12 +135,14 @@ public class Service extends IntentService {
         return;
     }
 
-    /**
+    */
+/**
      * Parses the JSON response for information about the Google doodles.
      *
      * @param doodleDataJsonResponse A JSON string which needs to be parsed for data about the
      *                               Google doodles.
-     */
+     *//*
+
     private void parseDoodleDataJsonResponse(String doodleDataJsonResponse)
             throws JSONException {
         try {
@@ -196,22 +201,33 @@ public class Service extends IntentService {
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
 
-       /* if (cursor.getCount() == 0) {
+       */
+/* if (cursor.getCount() == 0) {
             if (cVVector.size() > 0) {
                 ContentValues[] cvArray = new ContentValues[cVVector.size()];
                 cVVector.toArray(cvArray);
                 this.getContentResolver().bulkInsert(Contract.ProductData.CONTENT_URI, cvArray);
             }
-        }*/
+        }*//*
+
         // If the Item ID Does Not Exist, Insert All Values
         if (cursor.getCount() == 0) {
             Uri uri;
             uri = this.getContentResolver().insert(
                     Contract.ProductData.CONTENT_URI, values);
-        }
 
+            Cursor checkCursor = this.getContentResolver().query(
+                    Contract.ProductData.CONTENT_URI,  // The table to query
+                    null,                                // The columns to return
+                    Contract.ProductData.COLUMN_NAME_ITEMID + "= ?", // The columns for the WHERE clause
+                    new String[]{item_id}, // The values for the WHERE clause
+                    Contract.ProductData._ID + " DESC"                                 // The sort order
+            );
+            Log.v(LOG_TAG,"putDoodleDataIntoDb - cursor.getCount() "+ checkCursor.getCount());
+        }
     }
 }
 
 
 
+*/

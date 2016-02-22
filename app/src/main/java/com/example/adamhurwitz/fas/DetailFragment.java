@@ -99,6 +99,7 @@ public class DetailFragment extends Fragment {
                 favoriteButton.setImageResource(R.drawable.star_default_18dp);
             }
 
+
             favoriteButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Cursor cursor = getContext().getContentResolver().query(

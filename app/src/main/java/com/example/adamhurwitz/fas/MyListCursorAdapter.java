@@ -46,6 +46,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
+
         final MyListItem myListItem = MyListItem.fromCursor(cursor);
 
         final String imageUrl = myListItem.getImageUrl();
