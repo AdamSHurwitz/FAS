@@ -25,7 +25,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class CartActivity extends AppCompatActivity {
     public static final String LOG_TAG = FavoritesActivity.class.getSimpleName();
 
-    MyListCursorAdapter recyclerAdapter;
+    CartCursorAdapter cartAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -36,7 +36,7 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer_recycler_layout);
+        setContentView(R.layout.recycler_cart_layout);
 
         // Status Bar: Add Color
         Window window = getWindow();
@@ -66,7 +66,7 @@ public class CartActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         // create RecyclerView
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview_cart_id);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -86,8 +86,8 @@ public class CartActivity extends AppCompatActivity {
         Log.v(LOG_TAG, "onCreate() - cursor.getCount() " + cursor.getCount());
 
         // attach adapter to data
-        recyclerAdapter = new MyListCursorAdapter(this, cursor);
-        rv.setAdapter(recyclerAdapter);
+        cartAdapter = new CartCursorAdapter(this, cursor);
+        rv.setAdapter(cartAdapter);
 
     }
 

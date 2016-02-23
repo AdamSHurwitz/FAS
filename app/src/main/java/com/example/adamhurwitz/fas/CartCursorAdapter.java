@@ -16,11 +16,11 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by skyfishjy on 10/31/14.
  */
-public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorAdapter.ViewHolder> {
-    private final String LOG_TAG = MyListCursorAdapter.class.getSimpleName();
+public class CartCursorAdapter extends CursorRecyclerViewAdapter<CartCursorAdapter.ViewHolder> {
+    private final String LOG_TAG = CartCursorAdapter.class.getSimpleName();
     Context mContext;
 
-    public MyListCursorAdapter(Context context, Cursor cursor) {
+    public CartCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mContext = context;
     }
@@ -32,14 +32,14 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mImage = (ImageView) view.findViewById(R.id.recycler_item_image);
+            mImage = (ImageView) view.findViewById(R.id.recycler_cart_image);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item_view, parent, false);
+                .inflate(R.layout.recycler_cartitem_view, parent, false);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }

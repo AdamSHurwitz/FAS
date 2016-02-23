@@ -36,7 +36,7 @@ public class FavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer_recycler_layout);
+        setContentView(R.layout.recycler_favorite_layout);
 
         // Status Bar: Add Color
         Window window = getWindow();
@@ -66,7 +66,7 @@ public class FavoritesActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         // create RecyclerView
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview_favorite_id);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
