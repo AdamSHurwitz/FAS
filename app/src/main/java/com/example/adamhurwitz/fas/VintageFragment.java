@@ -46,13 +46,6 @@ public class VintageFragment extends Fragment implements LoaderManager.LoaderCal
         // in content do not change the layout size of the RecyclerView
         rv.setHasFixedSize(true);
 
-        setupRecyclerView(rv);
-
-        return rv;
-    }
-
-    // helper method to create LayoutManager and Adapter
-    private void setupRecyclerView(RecyclerView recyclerView) {
         // set LinearLayoutManager
         //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -66,11 +59,13 @@ public class VintageFragment extends Fragment implements LoaderManager.LoaderCal
         );
         Log.v(LOG_TAG, "setupRecyclerView() - cursor.getCount() " + cursor.getCount());
         // set GridLayoutManager
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         recyclerAdapter = new MyListCursorAdapter(getActivity(), cursor);
 
-        recyclerView.setAdapter(recyclerAdapter);
+        rv.setAdapter(recyclerAdapter);
+
+        return rv;
     }
 
     private void getDoodleData() {

@@ -72,8 +72,6 @@ public class FavoritesActivity extends AppCompatActivity {
         // in content do not change the layout size of the RecyclerView
         rv.setHasFixedSize(true);
 
-        //setupRecyclerView(rv);
-
         // set LinearLayoutManager
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -130,12 +128,6 @@ public class FavoritesActivity extends AppCompatActivity {
                 new String[]{"2"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"      // The sort order
         );
-
-        //asyncCursorAdapter = new AsyncCursorAdapter(this, cursor, 0);
-
-        // Get a reference to the grid view layout and attach the adapter to it.
-        /*GridView gridView = (GridView) this.findViewById(R.id.grid_view_layout);
-        gridView.setAdapter(asyncCursorAdapter);*/
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
