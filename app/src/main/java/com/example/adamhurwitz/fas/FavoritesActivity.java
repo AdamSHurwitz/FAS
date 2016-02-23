@@ -75,15 +75,14 @@ public class FavoritesActivity extends AppCompatActivity {
         //setupRecyclerView(rv);
 
         // set LinearLayoutManager
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         // query data
         Cursor cursor = this.getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
-                Contract.ProductData.COLUMN_NAME_VINTAGE + "= ? AND "
-                        + Contract.ProductData.COLUMN_NAME_RECENT + " = ? ", // The columns for the WHERE clause
-                new String[]{"0", "0"},                            // The values for the WHERE clause
+                Contract.ProductData.COLUMN_NAME_FAVORITE + "= ?", // The columns for the WHERE clause
+                new String[]{"2"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
         Log.v(LOG_TAG, "onCreate() - cursor.getCount() " + cursor.getCount());
@@ -141,13 +140,11 @@ public class FavoritesActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Favorites Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "Favorites Page",
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.example.adamhurwitz.fas/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -160,13 +157,11 @@ public class FavoritesActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Favorites Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW, //
+                "Favorites Page", //
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.example.adamhurwitz.fas/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);

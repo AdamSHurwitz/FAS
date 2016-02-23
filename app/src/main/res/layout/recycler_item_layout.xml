@@ -18,14 +18,14 @@
 <!-- build child layout view for RecyclerAdapter with Object IDs to call in Adapter-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:background="@color/main_screen_background">
 
     // center item view horizontally and show views vertically
 <!--android:gravity="center_horizontal"
@@ -44,14 +44,9 @@
         android:id="@+id/recycler_item_image"
         android:layout_width="@dimen/list_item_image_largeWidthsize"
         android:layout_height="@dimen/list_item_image_largeHeightsize"
-        android:scaleType="centerCrop"/>
-    <!--android:gravity="center"-->
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:background="@color/main_screen_background"/>
 
-    <TextView
-        android:id="@+id/recycler_item_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:gravity="left"/>
 
 </LinearLayout>
