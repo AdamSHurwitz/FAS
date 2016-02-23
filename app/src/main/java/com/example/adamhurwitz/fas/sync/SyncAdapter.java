@@ -194,6 +194,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         values.put(Contract.ProductData.COLUMN_NAME_RECENT, recent);
         values.put(Contract.ProductData.COLUMN_NAME_VINTAGE, vintage);
         values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, "1");
+        values.put(Contract.ProductData.COLUMN_NAME_CART, "1");
 
         // If you are querying entire table, can leave everything as Null
         // Querying when Item ID Exists

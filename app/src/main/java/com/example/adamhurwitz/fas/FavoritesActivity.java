@@ -120,15 +120,6 @@ public class FavoritesActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
 
-        // If you are querying entire table, can leave everything as Null
-        Cursor cursor = this.getContentResolver().query(
-                Contract.ProductData.CONTENT_URI,  // The table to query
-                null, // The columns to return
-                Contract.ProductData.COLUMN_NAME_FAVORITE + " = ?",
-                new String[]{"2"},                            // The values for the WHERE clause
-                Contract.ProductData._ID + " DESC"      // The sort order
-        );
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(

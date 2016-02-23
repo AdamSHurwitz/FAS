@@ -33,7 +33,9 @@ public class DetailFragment extends Fragment {
         //receive the intent
 
         final ImageButton favoriteButton = (ImageButton) view.findViewById(R.id.favorite_button);
+        final ImageButton cartButton = (ImageButton) view.findViewById(R.id.cart_button);
         String favVal = "";
+        String cartVal = "";
 
         //Activity has intent, must get intent from Activity
         Intent intent = getActivity().getIntent();
@@ -47,6 +49,7 @@ public class DetailFragment extends Fragment {
             // detailArray[3] = releaseDate
             // detailArray[4] = description
             // detailArray[5] = favorite
+            // detailArray[6] = cart
 
 
             // Create DoodleData Within 'detail_fragment_layout.xml'
@@ -83,7 +86,8 @@ public class DetailFragment extends Fragment {
             about.setText(detailArray[4]);
 
             Cursor c = getContext().getContentResolver().query(Contract.ProductData.CONTENT_URI,
-                    new String[]{Contract.ProductData.COLUMN_NAME_FAVORITE},
+                    new String[]{Contract.ProductData.COLUMN_NAME_FAVORITE,
+                            Contract.ProductData.COLUMN_NAME_CART},
                     Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
                     new String[]{detailArray[1]},
                     Contract.ProductData._ID);
@@ -91,12 +95,20 @@ public class DetailFragment extends Fragment {
                 c.moveToFirst();
                 favVal = c.getString(
                         c.getColumnIndexOrThrow(Contract.ProductData.COLUMN_NAME_FAVORITE));
+                cartVal = c.getString(
+                        c.getColumnIndexOrThrow(Contract.ProductData.COLUMN_NAME_CART));
             }
 
             if (favVal.equals("2")) {
                 favoriteButton.setImageResource(R.drawable.favorite_selected);
             } else {
                 favoriteButton.setImageResource(R.drawable.favorite_default);
+            }
+
+            if (cartVal.equals("2")) {
+                cartButton.setImageResource(R.drawable.cart_selected);
+            } else {
+                cartButton.setImageResource(R.drawable.cart_default);
             }
 
 
@@ -130,6 +142,38 @@ public class DetailFragment extends Fragment {
                     //cursor.close();
                 }
             });
+
+            cartButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Cursor cursor = getContext().getContentResolver().query(
+                            Contract.ProductData.CONTENT_URI,
+                            new String[]{Contract.ProductData.COLUMN_NAME_CART},
+                            Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                            new String[]{detailArray[1]},
+                            Contract.ProductData._ID + " DESC");
+                    ContentValues values = new ContentValues();
+
+                    if (detailArray[6].equals("1")) {
+                        cartButton.setImageResource(R.drawable.cart_selected);
+                        cursor.moveToFirst();
+                        values.put(Contract.ProductData.COLUMN_NAME_CART, 2);
+                        detailArray[6] = "2";
+                    } else {
+                        cartButton.setImageResource(R.drawable.cart_default);
+                        cursor.moveToFirst();
+                        values.put(Contract.ProductData.COLUMN_NAME_CART, 1);
+                        detailArray[6] = "1";
+                    }
+
+                    int rowsUpdated;
+                    rowsUpdated = getContext().getContentResolver().update(
+                            Contract.ProductData.CONTENT_URI, values,
+                            Contract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                            new String[]{detailArray[1]});
+                    //cursor.close();
+                }
+            });
+
         }
         return view;
     }

@@ -64,12 +64,14 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
                 .COLUMN_NAME_DESCRIPTION));
         final String favorite = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                 .COLUMN_NAME_FAVORITE));
+        final String cart = cursor.getString(cursor.getColumnIndex(Contract.ProductData
+                .COLUMN_NAME_CART));
 
         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String[] detailArray = {imageUrl, title, price, releaseDate,
-                        description, favorite};
+                        description, favorite, cart};
                 mContext.startActivity(new Intent(mContext, DetailActivity.class)
                         .putExtra("recylerAdapterExtra", detailArray));
                 Log.v(LOG_TAG, "onClick() - title " + title);
