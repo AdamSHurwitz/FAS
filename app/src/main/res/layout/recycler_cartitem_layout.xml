@@ -27,13 +27,12 @@
     android:orientation="vertical"
     android:background="@color/main_screen_background">
 
-    <ImageView
+    // images appear in circle shape
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/recycler_item_image"
-        android:layout_width="@dimen/list_item_image_largeWidthsize"
-        android:layout_height="@dimen/list_item_image_largeHeightsize"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        android:background="@color/main_screen_background"/>
-
+        android:layout_width="@dimen/list_item_image_largesize"
+        android:layout_height="@dimen/list_item_image_largesize"
+        android:layout_marginRight="16dp"
+        android:gravity="center"/>
 
 </LinearLayout>
