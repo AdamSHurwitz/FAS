@@ -22,7 +22,7 @@ import com.example.adamhurwitz.fas.data.Contract;
 
 public class CartActivity extends AppCompatActivity {
     public static final String LOG_TAG = CartActivity.class.getSimpleName();
-    private AsyncCursorAdapter asyncCursorAdapter;
+    //private AsyncCursorAdapter asyncCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,11 +127,11 @@ public class CartActivity extends AppCompatActivity {
                 Contract.ProductData._ID + " DESC"      // The sort order
         );
 
-        asyncCursorAdapter = new AsyncCursorAdapter(this, cursor, 0);
+        //asyncCursorAdapter = new AsyncCursorAdapter(this, cursor, 0);
 
         // Get a reference to the grid view layout and attach the adapter to it.
         GridView gridView = (GridView) this.findViewById(R.id.grid_view_layout);
-        gridView.setAdapter(asyncCursorAdapter);
+        //gridView.setAdapter(asyncCursorAdapter);
 
     }
 }

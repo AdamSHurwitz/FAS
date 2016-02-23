@@ -32,7 +32,6 @@
         android:id="@+id/recycler_item_image"
         android:layout_width="@dimen/list_item_image_largesize"
         android:layout_height="@dimen/list_item_image_largesize"
-        android:layout_marginRight="16dp"
         android:gravity="center"/>
 
 </LinearLayout>

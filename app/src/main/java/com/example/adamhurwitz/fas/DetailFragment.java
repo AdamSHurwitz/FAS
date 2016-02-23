@@ -94,9 +94,9 @@ public class DetailFragment extends Fragment {
             }
 
             if (favVal.equals("2")) {
-                favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                favoriteButton.setImageResource(R.drawable.favorite_selected);
             } else {
-                favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                favoriteButton.setImageResource(R.drawable.favorite_default);
             }
 
 
@@ -111,12 +111,12 @@ public class DetailFragment extends Fragment {
                     ContentValues values = new ContentValues();
 
                     if (detailArray[5].equals("1")) {
-                        favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                        favoriteButton.setImageResource(R.drawable.favorite_selected);
                         cursor.moveToFirst();
                         values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 2);
                         detailArray[5] = "2";
                     } else {
-                        favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                        favoriteButton.setImageResource(R.drawable.favorite_default);
                         cursor.moveToFirst();
                         values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, 1);
                         detailArray[5] = "1";
