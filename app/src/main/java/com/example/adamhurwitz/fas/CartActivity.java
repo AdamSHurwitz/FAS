@@ -23,9 +23,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 
 public class CartActivity extends AppCompatActivity {
-    public static final String LOG_TAG = FavoritesActivity.class.getSimpleName();
+    public static final String LOG_TAG = CartActivity.class.getSimpleName();
 
-    CartCursorAdapter cartAdapter;
+    CartCursorAdapter recyclerAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -79,15 +79,15 @@ public class CartActivity extends AppCompatActivity {
         Cursor cursor = this.getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
-                Contract.ProductData.COLUMN_NAME_CART + "= ?", // The columns for the WHERE clause
+                Contract.ProductData.COLUMN_NAME_FAVORITE + "= ?", // The columns for the WHERE clause
                 new String[]{"2"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
         Log.v(LOG_TAG, "onCreate() - cursor.getCount() " + cursor.getCount());
 
         // attach adapter to data
-        cartAdapter = new CartCursorAdapter(this, cursor);
-        rv.setAdapter(cartAdapter);
+        recyclerAdapter = new CartCursorAdapter(this, cursor);
+        rv.setAdapter(recyclerAdapter);
 
     }
 
@@ -124,7 +124,7 @@ public class CartActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW,
-                "Shopping Cart",
+                "Favorites Page",
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
@@ -141,7 +141,7 @@ public class CartActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, //
-                "Shopping Cart", //
+                "Favorites Page", //
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),

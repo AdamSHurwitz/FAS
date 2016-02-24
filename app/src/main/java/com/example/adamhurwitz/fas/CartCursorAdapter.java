@@ -32,14 +32,14 @@ public class CartCursorAdapter extends CursorRecyclerViewAdapter<CartCursorAdapt
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mImage = (ImageView) view.findViewById(R.id.recycler_cart_image);
+            mImage = (ImageView) view.findViewById(R.id.recycler_cart_item_image);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_cartitem_view, parent, false);
+                .inflate(R.layout.recycler_cart_item, parent, false);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }

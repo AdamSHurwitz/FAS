@@ -41,7 +41,7 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
         getDoodleData();
 
         RecyclerView rv = (RecyclerView) inflater.inflate(
-                R.layout.recycler_layout, container, false);
+                R.layout.recycler_main_layout, container, false);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView

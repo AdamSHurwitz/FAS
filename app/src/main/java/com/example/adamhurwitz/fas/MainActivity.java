@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.cart_menu_itm:
-                                Intent cartItent = new Intent(getApplicationContext(),
+                                Intent cartActivity = new Intent(getApplicationContext(),
                                         CartActivity.class);
-                                startActivity(cartItent);
+                                startActivity(cartActivity);
                                 return true;
 
                             default:

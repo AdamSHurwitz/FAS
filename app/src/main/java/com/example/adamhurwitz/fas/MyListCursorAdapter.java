@@ -39,7 +39,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item_view, parent, false);
+                .inflate(R.layout.recycler_item, parent, false);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }
