@@ -20,20 +20,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_screen_background"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp">
 
     // images appear in circle shape
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/recycler_cart_item_image"
         android:layout_width="@dimen/list_item_image_smallsize"
         android:layout_height="@dimen/list_item_image_smallsize"
+        android:layout_gravity="center_horizontal"
         android:background="@color/main_screen_background"
-        android:scaleType="centerCrop"/>
-    <!-- android:layout_gravity="center" -->
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/doodle_title_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp"
+        android:text="Doodle Title Holder" />
+
+    <TextView
+        android:id="@+id/doodle_price_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp"
+        android:text="$85" />
 
 
 </LinearLayout>
