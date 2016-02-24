@@ -35,8 +35,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right">
+        android:layout_gravity="right"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:paddingTop="16dp"
             android:paddingRight="8dp"
+            android:paddingTop="16dp"
             android:text="Total: " />
 
         <TextView
@@ -67,19 +67,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:paddingRight="16dp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right">
-
-        <Button
-            android:id="@+id/complete_btn"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Complete"
-            android:padding="16dp"
-            android:background="#9E9E9E" />
+            android:layout_gravity="right">
+
+            <Button
+                android:id="@+id/complete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#BDBDBD"
+                android:padding="16dp"
+                android:text="Complete" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

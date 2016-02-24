@@ -13,10 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.data.Contract;
 import com.google.android.gms.appindexing.Action;
@@ -109,7 +111,13 @@ public class CartActivity extends AppCompatActivity {
         totalQtyId.setText(String.valueOf(qty));
 
         Button completeBtn = (Button) findViewById(R.id.complete_btn);
-        //completeBtn.setOnClickListener();
+        completeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Launch Android Pay",Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 
     @Override
