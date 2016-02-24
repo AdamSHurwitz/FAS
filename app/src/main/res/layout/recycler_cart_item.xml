@@ -26,13 +26,6 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp">
 
-  <!--  <ImageView
-        android:id="@+id/recycler_cart_item_image"
-        android:layout_width="@dimen/list_item_image_largeWidthsize"
-        android:layout_height="@dimen/list_item_image_largeHeightsize"
-        android:background="@color/main_screen_background"
-        android:scaleType="centerCrop" />-->
-
     // images appear in circle shape
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/recycler_cart_item_image"
