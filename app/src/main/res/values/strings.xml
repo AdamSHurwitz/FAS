@@ -21,4 +21,7 @@
     <string name="sync_account_type">fas.example.com</string>
     <string name="content_authority">com.example.adamhurwitz.fas</string>
 
+    <!-- recycler cart item -->
+    <string name="total">Total: </string>
+    <string name="complete_btn">Complete</string>
 </resources>

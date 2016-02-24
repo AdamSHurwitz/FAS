@@ -59,7 +59,7 @@
             android:layout_weight="0"
             android:paddingRight="8dp"
             android:paddingTop="16dp"
-            android:text="Total: " />
+            android:text="@string/total" />
 
         <TextView
             android:id="@+id/totalprice_id"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:background="#BDBDBD"
                 android:padding="16dp"
-                android:text="Complete" />
+                android:text="@string/complete_btn" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

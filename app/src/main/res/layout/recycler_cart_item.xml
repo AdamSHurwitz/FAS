@@ -41,8 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="16dp"
-        android:text="Doodle Title Holder" />
+        android:padding="16dp" />
 
     <View
         android:layout_width="16dp"
@@ -55,8 +54,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="16dp"
-        android:text="$85" />
-
-
+        android:padding="16dp" />
 </LinearLayout>
