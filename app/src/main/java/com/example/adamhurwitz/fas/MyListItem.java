@@ -26,7 +26,7 @@ public class MyListItem {
     }
 
     public void setPrice(String price) {
-        this.price = price;
+        this.price = "$"+price;
     }
 
     public String getPrice() {
