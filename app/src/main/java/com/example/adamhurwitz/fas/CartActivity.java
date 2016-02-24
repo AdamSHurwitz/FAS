@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.adamhurwitz.fas.data.Contract;
 import com.google.android.gms.appindexing.Action;
@@ -79,7 +81,7 @@ public class CartActivity extends AppCompatActivity {
         Cursor cursor = this.getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
                 null, // The columns to return
-                Contract.ProductData.COLUMN_NAME_FAVORITE + "= ?", // The columns for the WHERE clause
+                Contract.ProductData.COLUMN_NAME_CART + "= ?", // The columns for the WHERE clause
                 new String[]{"2"},                            // The values for the WHERE clause
                 Contract.ProductData._ID + " DESC"                                 // The sort order
         );
@@ -89,6 +91,25 @@ public class CartActivity extends AppCompatActivity {
         recyclerAdapter = new CartCursorAdapter(this, cursor);
         rv.setAdapter(recyclerAdapter);
 
+        // set the order summary
+        int price;
+        int totalPrice = 0;
+        int qty = 0;
+
+        while(cursor.moveToNext()){
+            price = Integer.parseInt(cursor.getString(cursor.getColumnIndex(Contract.ProductData
+                    .COLUMN_NAME_PRICE)));
+            totalPrice = totalPrice + price;
+            qty = qty + 1;
+        }
+
+        TextView totalPriceId = (TextView) findViewById(R.id.totalprice_id);
+        TextView totalQtyId = (TextView) findViewById(R.id.totalqty_id);
+        totalPriceId.setText("$"+String.valueOf(totalPrice));
+        totalQtyId.setText(String.valueOf(qty));
+
+        Button completeBtn = (Button) findViewById(R.id.complete_btn);
+        //completeBtn.setOnClickListener();
     }
 
     @Override
