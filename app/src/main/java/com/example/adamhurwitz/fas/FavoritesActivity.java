@@ -25,7 +25,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class FavoritesActivity extends AppCompatActivity {
     public static final String LOG_TAG = FavoritesActivity.class.getSimpleName();
 
-    MyListCursorAdapter recyclerAdapter;
+    FavoriteCursorAdapter recyclerAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -86,7 +86,7 @@ public class FavoritesActivity extends AppCompatActivity {
         Log.v(LOG_TAG, "onCreate() - cursor.getCount() " + cursor.getCount());
 
         // attach adapter to data
-        recyclerAdapter = new MyListCursorAdapter(this, cursor);
+        recyclerAdapter = new FavoriteCursorAdapter(this, cursor);
         rv.setAdapter(recyclerAdapter);
 
     }

@@ -14,23 +14,25 @@
   ~ limitations under the License.
   -->
 
-<!-- build parent layout view for RecyclerAdapter -->
+<!-- build child layout view for RecyclerAdapter with Object IDs to call in Adapter-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_screen_background"
     android:orientation="vertical"
-    android:divider="?android:attr/dividerHorizontal"
-    android:dividerPadding="16dp"
-    android:showDividers="middle">
+    android:paddingBottom="16dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp">
 
-    <include layout="@layout/menu_bar" />
+    <ImageView
+        android:id="@+id/recycler_favoriteitem_image"
+        android:layout_width="@dimen/list_item_image_largeWidthsize"
+        android:layout_height="@dimen/list_item_image_largeHeightsize"
+        android:layout_gravity="center"
+        android:background="@color/main_screen_background"
+        android:scaleType="centerCrop" />
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/recyclerview_favorite_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/main_screen_background" />
 
 </LinearLayout>
