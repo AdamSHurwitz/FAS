@@ -29,7 +29,7 @@
     // images appear in circle shape
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/recycler_cart_item_image"
+        android:id="@+id/doodle_image_id"
         android:layout_width="@dimen/list_item_image_smallsize"
         android:layout_height="@dimen/list_item_image_smallsize"
         android:layout_gravity="center_horizontal"

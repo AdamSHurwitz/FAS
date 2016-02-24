@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.adamhurwitz.fas.data.Contract;
 import com.squareup.picasso.Picasso;
@@ -28,11 +29,15 @@ public class CartCursorAdapter extends CursorRecyclerViewAdapter<CartCursorAdapt
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public ImageView mImage;
+        public TextView mTitle;
+        public TextView mPrice;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mImage = (ImageView) view.findViewById(R.id.recycler_cart_item_image);
+            mImage = (ImageView) view.findViewById(R.id.doodle_image_id);
+            mTitle = (TextView) view.findViewById(R.id.doodle_title_id);
+            mPrice = (TextView) view.findViewById(R.id.doodle_price_id);
         }
     }
 
@@ -53,6 +58,8 @@ public class CartCursorAdapter extends CursorRecyclerViewAdapter<CartCursorAdapt
 
         Picasso.with(mContext).load(myListItem.getImageUrl()).noFade()
                 .into(viewHolder.mImage);
+        viewHolder.mTitle.setText(myListItem.getTitle());
+        viewHolder.mPrice.setText(myListItem.getPrice());
 
         final String title = cursor.getString(cursor.getColumnIndex(Contract.ProductData
                 .COLUMN_NAME_TITLE));
