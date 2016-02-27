@@ -28,7 +28,7 @@
 
     <ImageView
         android:id="@+id/recycler_item_image"
-        android:layout_width="@dimen/list_item_image_largeWidthsize"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_image_largeHeightsize"
         android:layout_gravity="center"
         android:background="@color/main_screen_background"
