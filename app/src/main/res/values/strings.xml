@@ -22,6 +22,8 @@
     <string name="content_authority">com.example.adamhurwitz.fas</string>
 
     <!-- recycler cart item -->
-    <string name="total">Total: </string>
+    <string name="total">TOTAL </string>
     <string name="complete_btn">Complete</string>
+    <string name="order_qty">QTY </string>
+    <string name="items_in_cart">ITEMS IN CART</string>
 </resources>

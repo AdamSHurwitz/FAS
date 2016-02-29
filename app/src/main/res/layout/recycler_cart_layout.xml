@@ -44,7 +44,7 @@
             android:layout_weight="0"
             android:paddingTop="16dp"
             android:paddingRight="8dp"
-            android:text="Qty: " />
+            android:text="@string/order_qty" />
 
         <TextView
             android:id="@+id/totalqty_id"

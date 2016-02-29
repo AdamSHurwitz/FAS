@@ -124,7 +124,7 @@ public class CartActivity extends AppCompatActivity {
                 // Go to the "item" child node of the root node.
                 // This will create the node for you if it doesn't already exist.
                 // Then using the setValue menu it will set value the node to a String value.
-                ref.child("Total Price").setValue(totalPrice);
+                ref.child("Qty").setValue(qty);
             }
         });
     }
