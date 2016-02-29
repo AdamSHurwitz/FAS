@@ -15,6 +15,7 @@ public final class Constants {
     /**
      * Constants for Firebase object properties
      */
+    public static final String FIREBASE_PROPERTY_QTY = "Qty";
 
 
     /**
