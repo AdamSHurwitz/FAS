@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.data.Contract;
+import com.example.adamhurwitz.fas.utils.Constants;
+import com.firebase.client.Firebase;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -35,6 +37,11 @@ public class CartActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+
+    // set the order summary
+    int price;
+    int totalPrice = 0;
+    int qty = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +100,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerAdapter = new CartCursorAdapter(this, cursor);
         rv.setAdapter(recyclerAdapter);
 
-        // set the order summary
-        int price;
-        int totalPrice = 0;
-        int qty = 0;
-
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             price = Integer.parseInt(cursor.getString(cursor.getColumnIndex(Contract.ProductData
                     .COLUMN_NAME_PRICE)));
             totalPrice = totalPrice + price;
@@ -107,15 +109,22 @@ public class CartActivity extends AppCompatActivity {
 
         TextView totalPriceId = (TextView) findViewById(R.id.totalprice_id);
         TextView totalQtyId = (TextView) findViewById(R.id.totalqty_id);
-        totalPriceId.setText("$"+String.valueOf(totalPrice));
+        totalPriceId.setText("$" + String.valueOf(totalPrice));
         totalQtyId.setText(String.valueOf(qty));
 
         Button completeBtn = (Button) findViewById(R.id.complete_btn);
         completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Launch Android Pay",Toast.LENGTH_SHORT)
+                Toast.makeText(getApplicationContext(), "Launch Android Pay", Toast.LENGTH_SHORT)
                         .show();
+                // Get the reference to the root node in Firebase
+                Firebase ref = new Firebase(Constants.FIREBASE_URL);
+                // Get the string that the user entered into the EditText
+                // Go to the "item" child node of the root node.
+                // This will create the node for you if it doesn't already exist.
+                // Then using the setValue menu it will set value the node to a String value.
+                ref.child("Total Price").setValue(totalPrice);
             }
         });
     }
