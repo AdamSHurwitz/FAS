@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.v(LOG_TAG,"Chavi is a boss");
         /**
          * Create Firebase references
          */
