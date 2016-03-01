@@ -1,305 +1,59 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red234\green234\blue234;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\deftab720
+# Copyright: Benjamin Weiss (keyboardsurfer) https://github.com/keyboardsurfer
+# Under CC-BY-SA V3.0 (https://creativecommons.org/licenses/by-sa/3.0/legalcode)
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clmgf \clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clmrg \clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
+# built application files
+*.apk
+*.ap_
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
 
-\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
-# Built application files\cell 
-\pard\intbl\itap1\cell \row
+# lint folder
+lint
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 *.apk\cell \row
+# files for the dex VM
+*.dex
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 *.ap_\cell \row
+# Java class files
+*.class
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
+# generated files
+bin/
+gen/
+classes/
+gen-external-apklibs/
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Files for the Dalvik VM\cell \row
+# maven output folder
+target
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 *.dex\cell \row
+# Local configuration file (sdk path, etc)
+local.properties
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
+# Eclipse project files
+.classpath
+.project
+.metadata
+.settings
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Java class files\cell \row
+# IntelliJ files
+.idea
+*.iml
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 *.class\cell \row
+# OSX files
+.DS_Store
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
+# Windows files
+Thumbs.db
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Generated files\cell \row
+# vi swap files
+*.swp
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 bin/\cell \row
+# backup files
+*.bak
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 gen/\cell \row
+# gradle directory
+.gradle
+build/
 
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 out/\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Gradle files\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 .gradle/\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 build/\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Local configuration file (sdk path, etc)\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 local.properties\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Proguard folder generated by Eclipse\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 proguard/\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Log Files\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 *.log\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Android Studio Navigation editor temp files\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 .navigation/\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Android Studio captures folder\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 captures/\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\partightenfactor0
-\cf2 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 \
-\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 # Intellij\cell \row
-
-\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth4020\clftsWidth3 \clminw1000 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl200 \clpadr200 \gaph\cellx4320
-\clvertalt \clshdrawnil \clwWidth6940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl360\qr\partightenfactor0
-\cf0 \cell 
-\pard\intbl\itap1\pardeftab720\sl404\partightenfactor0
-\cf2 *.iml\cell \lastrow\row
-}
+#for oh-my-zsh jira plugin (https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#jira)
+.jira-url
+atlassian-ide-plugin.xml
