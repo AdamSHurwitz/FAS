@@ -21,8 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.data.Contract;
+import com.example.adamhurwitz.fas.model.Item;
 import com.example.adamhurwitz.fas.utils.Constants;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -116,6 +120,8 @@ public class CartActivity extends AppCompatActivity {
         completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // put to firebase - object
+
                 Toast.makeText(getApplicationContext(), "Launch Android Pay", Toast.LENGTH_SHORT)
                         .show();
                 // Get the reference to the root node in Firebase
@@ -124,7 +130,39 @@ public class CartActivity extends AppCompatActivity {
                 // Go to the "item" child node of the root node.
                 // This will create the node for you if it doesn't already exist.
                 // Then using the setValue menu it will set value the node to a String value.
-                ref.child("Qty").setValue(qty);
+
+                Item item = new Item(String.valueOf(qty));
+
+                ref.child("Item_Object").setValue(item);
+
+                // read from firebase - object
+                /**
+                 * Create Firebase references
+                 */
+                Firebase refListName = new Firebase(Constants.FIREBASE_URL).child("Item_Object");
+
+                /**
+                 * Add ValueEventListeners to Firebase references
+                 * to control get data and control behavior and visibility of elements
+                 */
+                refListName.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // You can get the text using getValue. Since the DataSnapshot is of the exact
+                        // data you asked for (the node listName), when you use getValue you know it
+                        // will return a String.
+                        Item item = dataSnapshot.getValue(Item.class);
+                        // Now take the TextView for the list name
+                        // and set it's value to listName.
+
+                        Log.v(LOG_TAG, "Firebase test to get qty - " + item.getItem_id());
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
             }
         });
     }
