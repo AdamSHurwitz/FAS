@@ -5,7 +5,7 @@ package com.example.adamhurwitz.fas.model;
  */
 public class Item {
     String item_id;
-   /* String title;
+    String title;
     String description;
     String search_strings;
     String image_url;
@@ -15,18 +15,17 @@ public class Item {
     String recent;
     String vintage;
     String favorite;
-    String cart;*/
+    String cart;
 
     public Item() {
     }
 
-    public Item(String item_id
-           /* , String title, String description, String search_strings,
+    public Item(String item_id, String title, String description, String search_strings,
                 String image_url, String release_date, String price, String popularity,
-                String recent, String vintage, String favorite, String cart*/
+                String recent, String vintage, String favorite, String cart
     ) {
         this.item_id = item_id;
-        /*this.title = title;
+        this.title = title;
         this.description = description;
         this.search_strings = search_strings;
         this.image_url = image_url;
@@ -36,14 +35,14 @@ public class Item {
         this.recent = recent;
         this.vintage = vintage;
         this.favorite = favorite;
-        this.cart = cart;*/
+        this.cart = cart;
     }
 
     public String getItem_id() {
         return item_id;
     }
 
-   /* public String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -85,6 +84,5 @@ public class Item {
 
     public String getCart() {
         return cart;
-    }*/
-
+    }
 }

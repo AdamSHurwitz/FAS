@@ -178,6 +178,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                               String search_strings, int price, String image,
                               Double popularity, Boolean recent, Boolean vintage) {
 
+        //TODO: create firebase object and insert values as children including values
+
         // Put Info into Database
 
         // Create a new map of values, where column names are the keys
