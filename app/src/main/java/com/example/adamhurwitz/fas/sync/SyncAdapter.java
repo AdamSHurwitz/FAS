@@ -5,16 +5,17 @@ import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.SyncResult;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.adamhurwitz.fas.R;
 import com.example.adamhurwitz.fas.data.Contract;
+import com.example.adamhurwitz.fas.model.Item;
+import com.example.adamhurwitz.fas.utils.Constants;
+import com.firebase.client.Firebase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -155,7 +156,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             // Initialize ArrayList of Content Values size of data Array length
             for (int index = 0; index < jsonarray.length(); index++) {
                 JSONObject jsonObject = jsonarray.getJSONObject(index);
-                putDataIntoDb(
+                putDataIntoFirebase(
                         jsonObject.getString(ID_PARAMETER),
                         jsonObject.getString(TITLE_PARAMETER),
                         jsonObject.getString(RELEASE_DATE_PARAMETER),
@@ -174,23 +175,41 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    public void putDataIntoDb(String item_id, String title, String date, String description,
-                              String search_strings, int price, String image,
-                              Double popularity, Boolean recent, Boolean vintage) {
+    public void putDataIntoFirebase(String item_id, String title, String date, String description,
+                                    String search_strings, int price, String imageUrl,
+                                    Double popularity, Boolean recent, Boolean vintage) {
+
+        boolean favorite = false;
+        boolean cart = false;
 
         //TODO: create firebase object and insert values as children including values
+        Item item = new Item(item_id, title, description, search_strings, imageUrl, date, price,
+                popularity, recent, vintage, favorite, cart);
+
+        //TODO: put object into firebase
+
+        // put to firebase - object
+
+        // Get the reference to the root node in Firebase
+        Firebase ref = new Firebase(Constants.FIREBASE_URL);
+        // Get the string that the user entered into the EditText
+        // Go to the "item" child node of the root node.
+        // This will create the node for you if it doesn't already exist.
+        // Then using the setValue menu it will set value the node to a String value.
+
+        ref.child(item_id).setValue(item);
 
         // Put Info into Database
 
         // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
+        /*ContentValues values = new ContentValues();
         values.put(Contract.ProductData.COLUMN_NAME_ITEMID, item_id);
         values.put(Contract.ProductData.COLUMN_NAME_TITLE, title);
         values.put(Contract.ProductData.COLUMN_NAME_RELEASEDATE, date);
         values.put(Contract.ProductData.COLUMN_NAME_DESCRIPTION, description);
         values.put(Contract.ProductData.COLUMN_NAME_SEARCHSTRINGS, search_strings);
         values.put(Contract.ProductData.COLUMN_NAME_PRICE, price);
-        values.put(Contract.ProductData.COLUMN_NAME_IMAGEURL, image);
+        values.put(Contract.ProductData.COLUMN_NAME_IMAGEURL, imageUrl);
         values.put(Contract.ProductData.COLUMN_NAME_DESCRIPTION, description);
         values.put(Contract.ProductData.COLUMN_NAME_POPULARITY, popularity);
         values.put(Contract.ProductData.COLUMN_NAME_RECENT, recent);
@@ -214,7 +233,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Uri uri;
             uri = getContext().getContentResolver().insert(
                     Contract.ProductData.CONTENT_URI, values);
-        }
+        }*/
     }
 
     /*private void notifyData() {

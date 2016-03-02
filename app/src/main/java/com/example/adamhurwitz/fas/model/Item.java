@@ -8,27 +8,26 @@ public class Item {
     String title;
     String description;
     String search_strings;
-    String image_url;
+    String imageUrl;
     String release_date;
-    String price;
-    String popularity;
-    String recent;
-    String vintage;
-    String favorite;
-    String cart;
+    int price;
+    double popularity;
+    boolean recent;
+    boolean vintage;
+    boolean favorite;
+    boolean cart;
 
     public Item() {
     }
 
     public Item(String item_id, String title, String description, String search_strings,
-                String image_url, String release_date, String price, String popularity,
-                String recent, String vintage, String favorite, String cart
-    ) {
+                String image_url, String release_date, int price, double popularity,
+                boolean recent, boolean vintage, boolean favorite, boolean cart) {
         this.item_id = item_id;
         this.title = title;
         this.description = description;
         this.search_strings = search_strings;
-        this.image_url = image_url;
+        this.imageUrl = image_url;
         this.release_date = release_date;
         this.price = price;
         this.popularity = popularity;
@@ -55,34 +54,34 @@ public class Item {
     }
 
     public String getImage_url() {
-        return image_url;
+        return imageUrl;
     }
 
     public String getRelease_date() {
         return release_date;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public String getPopularity() {
+    public double getPopularity() {
         return popularity;
     }
 
-    public String getRecent() {
+    public boolean getRecent() {
         return recent;
     }
 
-    public String getVintage() {
+    public boolean getVintage() {
         return vintage;
     }
 
-    public String getFavorite() {
+    public boolean getFavorite() {
         return favorite;
     }
 
-    public String getCart() {
+    public boolean getCart() {
         return cart;
     }
 }
