@@ -47,7 +47,7 @@ public class PopularFragment extends Fragment implements LoaderManager.LoaderCal
         // in content do not change the layout size of the RecyclerView
         rv.setHasFixedSize(true);
 
-        //setupRecyclerView(rv);
+        //TODO: build Adapter for firebase data
 
         Cursor cursor = getContext().getContentResolver().query(
                 Contract.ProductData.CONTENT_URI,  // The table to query
