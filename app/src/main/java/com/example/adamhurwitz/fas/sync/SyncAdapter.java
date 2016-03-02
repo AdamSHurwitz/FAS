@@ -182,11 +182,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         boolean favorite = false;
         boolean cart = false;
 
-        //TODO: create firebase object and insert values as children including values
         Item item = new Item(item_id, title, description, search_strings, imageUrl, date, price,
                 popularity, recent, vintage, favorite, cart);
-
-        //TODO: put object into firebase
 
         // put to firebase - object
 
