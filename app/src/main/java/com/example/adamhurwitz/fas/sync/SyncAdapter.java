@@ -179,22 +179,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                     String search_strings, int price, String imageUrl,
                                     Double popularity, Boolean recent, Boolean vintage) {
 
+        //TODO: Add logic to put in PopularFragment, RecentFragment, VintageFragment
+
         boolean favorite = false;
         boolean cart = false;
 
+        /**
+         * Create Firebase references
+         */
+        Firebase ref = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
+        Firebase newListRef = ref.push();
         Item item = new Item(item_id, title, description, search_strings, imageUrl, date, price,
                 popularity, recent, vintage, favorite, cart);
-
-        // put to firebase - object
-
-        // Get the reference to the root node in Firebase
-        Firebase ref = new Firebase(Constants.FIREBASE_URL);
-        // Get the string that the user entered into the EditText
-        // Go to the "item" child node of the root node.
-        // This will create the node for you if it doesn't already exist.
-        // Then using the setValue menu it will set value the node to a String value.
-
-        ref.child(item_id).setValue(item);
+        newListRef.setValue(item);
     }
 
     /*private void notifyData() {

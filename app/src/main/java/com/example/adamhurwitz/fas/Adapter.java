@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Populates the list_view_active_lists inside ItemsFragment
  */
-public class Adapter extends FirebaseListAdapter<Item> {
+public abstract class Adapter extends FirebaseListAdapter<Item> {
     Context mContext;
 
     /**

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.adamhurwitz.fas.utils.Constants;;
 import com.example.adamhurwitz.fas.model.Item;
@@ -27,10 +28,7 @@ public class AdapterFragment extends Fragment {
         /* Required empty public constructor */
     }
 
-    //MyListCursorAdapter recyclerAdapter;
-
     private final String LOG_TAG = AdapterFragment.class.getSimpleName();
-    // private static final int LOADER_FRAGMENT = 0;
 
     /**
      * Initialize instance variables with data from bundle
@@ -53,7 +51,7 @@ public class AdapterFragment extends Fragment {
         /**
          * Create Firebase references
          */
-        Firebase activeListsRef = new Firebase(Constants.FIREBASE_URL);
+        Firebase activeListsRef = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
 
         /**
          * Add ValueEventListeners to Firebase references
@@ -74,7 +72,7 @@ public class AdapterFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Toast.makeText(getContext(), "Click Listener", Toast.LENGTH_SHORT).show();
             }
         });
 
