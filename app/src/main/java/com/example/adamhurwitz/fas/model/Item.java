@@ -8,7 +8,7 @@ public class Item {
     String title;
     String description;
     String search_strings;
-    String imageUrl;
+    static String imageUrl;
     String release_date;
     int price;
     double popularity;
@@ -53,7 +53,7 @@ public class Item {
         return search_strings;
     }
 
-    public String getImage_url() {
+    public static String getImageUrl() {
         return imageUrl;
     }
 

@@ -195,42 +195,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         // Then using the setValue menu it will set value the node to a String value.
 
         ref.child(item_id).setValue(item);
-
-        // Put Info into Database
-
-        // Create a new map of values, where column names are the keys
-        /*ContentValues values = new ContentValues();
-        values.put(Contract.ProductData.COLUMN_NAME_ITEMID, item_id);
-        values.put(Contract.ProductData.COLUMN_NAME_TITLE, title);
-        values.put(Contract.ProductData.COLUMN_NAME_RELEASEDATE, date);
-        values.put(Contract.ProductData.COLUMN_NAME_DESCRIPTION, description);
-        values.put(Contract.ProductData.COLUMN_NAME_SEARCHSTRINGS, search_strings);
-        values.put(Contract.ProductData.COLUMN_NAME_PRICE, price);
-        values.put(Contract.ProductData.COLUMN_NAME_IMAGEURL, imageUrl);
-        values.put(Contract.ProductData.COLUMN_NAME_DESCRIPTION, description);
-        values.put(Contract.ProductData.COLUMN_NAME_POPULARITY, popularity);
-        values.put(Contract.ProductData.COLUMN_NAME_RECENT, recent);
-        values.put(Contract.ProductData.COLUMN_NAME_VINTAGE, vintage);
-        values.put(Contract.ProductData.COLUMN_NAME_FAVORITE, "1");
-        values.put(Contract.ProductData.COLUMN_NAME_CART, "1");
-
-        // If you are querying entire table, can leave everything as Null
-        // Querying when Item ID Exists
-        Cursor cursor = getContext().getContentResolver().query(
-                Contract.ProductData.CONTENT_URI,  // The table to query
-                null,                                // The columns to return
-                Contract.ProductData.COLUMN_NAME_ITEMID + "= ?", // The columns for the WHERE clause
-                new String[]{item_id}, // The values for the WHERE clause
-                Contract.ProductData._ID + " DESC"                                 // The sort order
-        );
-
-
-        // If the Item ID Does Not Exist, Insert All Values
-        if (cursor.getCount() == 0) {
-            Uri uri;
-            uri = getContext().getContentResolver().insert(
-                    Contract.ProductData.CONTENT_URI, values);
-        }*/
     }
 
     /*private void notifyData() {

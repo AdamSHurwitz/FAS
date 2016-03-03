@@ -43,5 +43,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 
+    /* Firebase SDK */
     compile 'com.firebase:firebase-client-android:2.4.0'
+
+    /* Firebase UI */
+    compile 'com.firebaseui:firebase-ui:0.2.2'
 }
