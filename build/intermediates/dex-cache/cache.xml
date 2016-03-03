@@ -2,53 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.0.0/jars/classes.jar"
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-android/2.4.0/f00bc767918ad9c89e5c13e25706d033a58e13c2/firebase-client-android-2.4.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-f6965234506044196e40198fe6441e670c6dedd5.jar" />
+        sha1="f00bc767918ad9c89e5c13e25706d033a58e13c2">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/firebase-client-android-2.4.0-c21c0ec80170a22d695715738afc9fd91bee9bd6.jar" />
     </item>
     <item
-        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.1/jars/classes.jar"
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.12/6ec0bbd3e161a73ed672284b587fd32309a86d7a/tubesock-0.0.12.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="5e412e954a24c5310a459c09870e4e2081aceb03">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-95029ee8b6d12c81c8f30cafc31c2436074d5d0d.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.4.0/558e074f136fee609b8758480ecd00e286595137/firebase-client-jvm-2.4.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="558e074f136fee609b8758480ecd00e286595137">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/firebase-client-jvm-2.4.0-b50c30a51f3a6dab6a1251800b676e69c0ca2f96.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-eea5f9071b86b92ed185295ef149eae1a2eb5989.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-2c487280982d00e7256917860635d19a2dc2e4b6.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.2.2/3c8f6018eaa72d43b261181e801e6f8676c16ef6/jackson-databind-2.2.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/jackson-databind-2.2.2-51d67d20848b4ae463f6fd7e487b7384f6cba444.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-fb1e2c7402f64b5c17564245243b48eabf723632.jar" />
+        sha1="6ec0bbd3e161a73ed672284b587fd32309a86d7a">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/tubesock-0.0.12-8aef6af1e5468ca4c185a8d0d27ecedfc55ac56c.jar" />
     </item>
     <item
         jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.2.2/285cb9c666f0f0f3dd8a1be04e1f457eb7b15113/jackson-annotations-2.2.2.jar"
@@ -65,6 +30,13 @@
         <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/jsr305-2.0.1-ce06a5aa0c3138520753472b7e9271f6c70f35b4.jar" />
     </item>
     <item
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-2c487280982d00e7256917860635d19a2dc2e4b6.jar" />
+    </item>
+    <item
         jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -72,60 +44,18 @@
         <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-99b0dcceca974fa8cf3a03459149f385bf85bf60.jar" />
     </item>
     <item
-        jar="/Users/adamhurwitz/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.2.2/3c8f6018eaa72d43b261181e801e6f8676c16ef6/jackson-databind-2.2.2.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-0b03fe5bcab2a2c66254965a7385e9cf9ccc751f.jar" />
+        sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/jackson-databind-2.2.2-51d67d20848b4ae463f6fd7e487b7384f6cba444.jar" />
     </item>
     <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.12/6ec0bbd3e161a73ed672284b587fd32309a86d7a/tubesock-0.0.12.jar"
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.4.0/558e074f136fee609b8758480ecd00e286595137/firebase-client-jvm-2.4.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="6ec0bbd3e161a73ed672284b587fd32309a86d7a">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/tubesock-0.0.12-8aef6af1e5468ca4c185a8d0d27ecedfc55ac56c.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho/1.3.0/87e6bfd8d961a57cf8cbecebcbd68489d41bd4fc/stetho-1.3.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="87e6bfd8d961a57cf8cbecebcbd68489d41bd4fc">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/stetho-1.3.0-cbacd14ed7576852fa92d94384e6449499b0f79d.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-android/2.4.0/f00bc767918ad9c89e5c13e25706d033a58e13c2/firebase-client-android-2.4.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="f00bc767918ad9c89e5c13e25706d033a58e13c2">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/firebase-client-android-2.4.0-c21c0ec80170a22d695715738afc9fd91bee9bd6.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/commons-cli-1.2-0aae54bb2d65f218a5a75a8eb0888e19daf04061.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.2/d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b/jackson-core-2.2.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.2-e870344748f488d1be081abc131fdf5f8b0470b2.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-729e9e7fbb0769cd9039aeca73a506b84f9f408b.jar" />
-    </item>
-    <item
-        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
-        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-ea22acb89da0e8777142e5c93e5b068b2dd6bf58.jar" />
+        sha1="558e074f136fee609b8758480ecd00e286595137">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/firebase-client-jvm-2.4.0-b50c30a51f3a6dab6a1251800b676e69c0ca2f96.jar" />
     </item>
     <item
         jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars/classes.jar"
@@ -135,11 +65,81 @@
         <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-17e23657353068fa297af02a46e880b43ae9e9ce.jar" />
     </item>
     <item
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho/1.3.0/87e6bfd8d961a57cf8cbecebcbd68489d41bd4fc/stetho-1.3.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="87e6bfd8d961a57cf8cbecebcbd68489d41bd4fc">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/stetho-1.3.0-cbacd14ed7576852fa92d94384e6449499b0f79d.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-729e9e7fbb0769cd9039aeca73a506b84f9f408b.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.2/d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b/jackson-core-2.2.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.2-e870344748f488d1be081abc131fdf5f8b0470b2.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/commons-cli-1.2-0aae54bb2d65f218a5a75a8eb0888e19daf04061.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-0b03fe5bcab2a2c66254965a7385e9cf9ccc751f.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-fb1e2c7402f64b5c17564245243b48eabf723632.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-f6965234506044196e40198fe6441e670c6dedd5.jar" />
+    </item>
+    <item
         jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
         <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-a20d74a8d1484c944979842b1bc177ffefff85ec.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-eea5f9071b86b92ed185295ef149eae1a2eb5989.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5e412e954a24c5310a459c09870e4e2081aceb03">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-95029ee8b6d12c81c8f30cafc31c2436074d5d0d.jar" />
+    </item>
+    <item
+        jar="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/Users/adamhurwitz/Drive/Hacking/Working/firebase app - shopping/FAS/app/build/intermediates/pre-dexed/debug/classes-ea22acb89da0e8777142e5c93e5b068b2dd6bf58.jar" />
     </item>
 
 </items>
