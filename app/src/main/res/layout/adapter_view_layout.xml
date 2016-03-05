@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_fragment_shopping_lists"
@@ -8,29 +8,9 @@
     <!-- tools:context=".ShoppingListsFragment" -->
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_id"
+        android:id="@+id/firebaserecyclerview_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ListView
-            android:id="@+id/listview_id"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="none" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/cart_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
-    </RelativeLayout>-->
-</FrameLayout>
+</RelativeLayout>
 

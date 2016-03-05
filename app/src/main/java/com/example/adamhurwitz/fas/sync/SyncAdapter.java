@@ -175,8 +175,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    public void putDataIntoFirebase(String item_id, String title, String date, String description,
-                                    String search_strings, int price, String imageUrl,
+    public void putDataIntoFirebase(String item_id,
+                                    String title, String date, String description,
+                                    String search_strings, int price,
+                                    String imageUrl,
                                     Double popularity, Boolean recent, Boolean vintage) {
 
         //TODO: Add logic to put in PopularFragment, RecentFragment, VintageFragment

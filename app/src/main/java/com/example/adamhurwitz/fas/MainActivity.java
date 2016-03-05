@@ -2,6 +2,8 @@ package com.example.adamhurwitz.fas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -9,12 +11,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.adamhurwitz.fas.sync.SyncAdapter;
 import com.facebook.stetho.DumperPluginsProvider;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.dumpapp.DumperPlugin;
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getDoodleData();
         // Initialize Stetho
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
@@ -137,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PopularFragment(), "Popular");
+        //adapter.addFragment(new PopularFragment(), "Popular");
         adapter.addFragment(new AdapterFragment(), "Firebase");
         /*adapter.addFragment(new RecentFragment(), "Recent");
         adapter.addFragment(new VintageFragment(), "Vintage");*/
@@ -164,6 +169,25 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getDoodleData() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        Log.v(LOG_TAG, "getDoodleData()");
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            SyncAdapter.syncImmediately(this);
+            Log.v(LOG_TAG, "getDoodleData() - syncImmediately()");
+        }
+    }
+    public boolean isMimagesFilled(RecyclerView view){
+        boolean x = false;
+        if (view != null){
+            x = true;
+        }
+        else{x = false;}
+        return x;
     }
 
     // Create class for Stetho

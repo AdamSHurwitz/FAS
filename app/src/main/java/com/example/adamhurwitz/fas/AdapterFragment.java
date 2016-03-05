@@ -1,22 +1,25 @@
 package com.example.adamhurwitz.fas;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.adamhurwitz.fas.model.Item;
+import com.example.adamhurwitz.fas.sync.SyncAdapter;
 import com.example.adamhurwitz.fas.utils.Constants;
+import com.example.adamhurwitz.fas.utils.FirebaseRecyclerAdapter;
 import com.firebase.client.Firebase;
 import com.firebase.client.Query;
-import com.firebase.ui.FirebaseRecyclerAdapter;
 import com.squareup.picasso.Picasso;
-
-;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -24,14 +27,10 @@ import com.squareup.picasso.Picasso;
 // public class AdapterFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 public class AdapterFragment extends Fragment {
     private final String LOG_TAG = AdapterFragment.class.getSimpleName();
-    //private ListView mListView;
     private Firebase mRef;
-    private String string;
-    RecyclerView mListView;
-    private RecyclerView mImages;
-    private FirebaseRecyclerAdapter<Item, ItemHolder> mRecycleViewAdapter;
     private Query mImageRef;
-    Context mContext;
+    // private RecyclerView mImages;
+    // private FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter;
 
     /**
      * Empty constructor for the PopularFragment class.
@@ -51,87 +50,64 @@ public class AdapterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //getDoodleData();
 
         /**
          * Initialize UI elements
          */
         View rootView = inflater.inflate(R.layout.adapter_view_layout, container, false);
-        //initializeScreen(rootView);
+        Log.v(LOG_TAG, "rootView is " + isRootFilled(rootView));
 
         /**
-         * Create Firebase references
+         *  Create Firebase references
          */
         Firebase mRef = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
 
-        mImages = (RecyclerView) getActivity().findViewById(R.id.recyclerview_id);
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        manager.setReverseLayout(false);
-        mImages.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mImages.setHasFixedSize(true);
-        mImages.setLayoutManager(manager);
+        mImageRef = mRef.limitToLast(50);
 
-        mRecycleViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(
+                R.id.firebaserecyclerview_id);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
+                R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
+            @Override
+            public void populateViewHolder(ItemHolder itemHolder, Item item, int position) {
+                itemHolder.setImage(item.getImageUrl());
+            }
+        };
+
+        recyclerView.setAdapter(mRecyclerViewAdapter);
+
+        /*LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+
+        manager.setReverseLayout(false);
+        //if (mImages != null) {
+            mImages.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mImages.setHasFixedSize(true);
+            mImages.setLayoutManager(manager);
+        //}*/
+
+      /*  mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
                 R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
             @Override
             public void populateViewHolder(ItemHolder imageView, Item image, int position) {
                 imageView.setImage(image.getImageUrl());
             }
-        };
+        };*/
 
-        mImages.setAdapter(mRecycleViewAdapter);
-
-        /**
-         * Add ValueEventListeners to Firebase references
-         * to control get data and control behavior and visibility of elements
-         */
-        /*mAdapter = new Adapter(getActivity(), Item.class,
-                R.layout.adapter_item_layout, activeListsRef);*/
-
-        /**
-         * Set the adapter to the mListView
-         */
-        // mListView.setAdapter(mAdapter);
-
-
-        /**
-         * Set interactive bits, such as click events and adapters
-         */
-        /*mImages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), "Click Listener", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        //if (mImages != null) {
+        // mImages.setAdapter(mRecyclerViewAdapter);
+        //}
 
         return rootView;
     }
 
-    /**
-     * Link list view from XML
-     */
-  /*  private void initializeScreen(View rootView) {
-        mListView = (ListView) rootView.findViewById(R.id.listview_id);
-    }*/
 
-    @Override
+    //@Override
     public Firebase getFirebaseRef() {
         return mRef;
-    }
-
-    public static class Item {
-        String imageUrl;
-
-        public Item() {
-
-        }
-
-        public Item(String image_url) {
-            this.imageUrl = image_url;
-        }
-
-        public String getImageUrl() {
-            return imageUrl;
-        }
     }
 
     public static class ItemHolder extends RecyclerView.ViewHolder {
@@ -148,6 +124,37 @@ public class AdapterFragment extends Fragment {
             Picasso.with(mContext).load(imageUrl).noFade()
                     .into(imageView);
         }
+    }
+
+    private void getDoodleData() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        Log.v(LOG_TAG, "getDoodleData()");
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            SyncAdapter.syncImmediately(getActivity());
+            Log.v(LOG_TAG, "getDoodleData() - syncImmediately()");
+        }
+    }
+
+    public boolean isMimagesFilled(RecyclerView view) {
+        boolean x = false;
+        if (view != null) {
+            x = true;
+        } else {
+            x = false;
+        }
+        return x;
+    }
+
+    public boolean isRootFilled(View view) {
+        boolean x = false;
+        if (view != null) {
+            x = true;
+        } else {
+            x = false;
+        }
+        return x;
     }
 }
 
