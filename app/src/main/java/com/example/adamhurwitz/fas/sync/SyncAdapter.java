@@ -181,6 +181,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                     String imageUrl,
                                     Double popularity, Boolean recent, Boolean vintage) {
 
+        //TODO: Add logic to put in PopularFragment, RecentFragment, VintageFragment
         //TODO: Add logic to read from Objects and only put info into them if empty
 
         boolean favorite = false;
@@ -201,6 +202,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         /**
          * Create Firebase reference
          */
+     /*   Firebase ref = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
+        Firebase newListRef = ref.push();*/
         Firebase ref = new Firebase(firebaseUrl);
         Firebase newListRef = ref.push();
         newListRef.setValue(item);
@@ -208,7 +211,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     /*private void notifyData() {
         Context context = getContext();
-
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String lastNotificationKey = context.getString(R.string.pref_last_notification);
@@ -217,28 +219,21 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         boolean notificationsPref = prefs.getBoolean(displayNotificationsKey,
                 Boolean.parseBoolean(context.getString(R.string.notification_default)));
         Log.v(LOG_TAG, "Notification SharedPref: " + notificationsPref);
-
         if (notificationsPref && System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {
             Log.v(LOG_TAG, "Notification SharedPref: " + notificationsPref);
             // Last sync was more than 1 day ago, let's send a notification
-
             Uri uri = Contract.ProductData.CONTENT_URI;
-
             // we'll query our contentProvider, as always
             Cursor cursor = context.getContentResolver().query(uri, NOTIFY_PRODUCT_PROJECTION,
                     null, null, null);
-
             if (cursor.moveToFirst()) {
                 int product_index = cursor.getInt(INDEX_ID);
                 String price = cursor.getString(INDEX_PRICE);
                 double product_title = cursor.getDouble(INDEX_TITLE);
-
                 int iconId = R.drawable.and_green;
                 String title = context.getString(R.string.app_name);
-
                 // Define the text of the forecast.
                 String contentText = "New Doodle Available " + product_title + " | " + price;
-
                 // NotificationCompatBuilder is a very convenient way to build backward-compatible
                 // notifications.  Just throw in some data.
                 NotificationCompat.Builder mBuilder =
@@ -246,11 +241,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 .setSmallIcon(iconId)
                                 .setContentTitle(title)
                                 .setContentText(contentText);
-
                 // Make something interesting happen when the user clicks on the notification.
                 // In this case, opening the app is sufficient.
                 Intent resultIntent = new Intent(context, MainActivity.class);
-
                 // The stack builder object will contain an artificial back stack for the
                 // started Activity.
                 // This ensures that navigating backward from the Activity leads out of
@@ -263,13 +256,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 PendingIntent.FLAG_UPDATE_CURRENT
                         );
                 mBuilder.setContentIntent(resultPendingIntent);
-
                 NotificationManager mNotificationManager =
                         (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
                 // PRODUCT_NOTIFICATION_ID allows you to update the notification later on.
                 mNotificationManager.notify(PRODUCT_NOTIFICATION_ID, mBuilder.build());
-
-
                 //refreshing last sync
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(lastNotificationKey, System.currentTimeMillis());

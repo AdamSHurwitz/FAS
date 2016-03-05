@@ -45,12 +45,12 @@ public class AdapterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getDoodleData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //getDoodleData();
 
         /**
          * Initialize UI elements
@@ -61,7 +61,7 @@ public class AdapterFragment extends Fragment {
         /**
          *  Create Firebase references
          */
-        Firebase mRef = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
+        Firebase mRef = new Firebase(Constants.FIREBASE_URL);
 
         mImageRef = mRef.limitToLast(50);
 
@@ -130,7 +130,6 @@ public class AdapterFragment extends Fragment {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-        Log.v(LOG_TAG, "getDoodleData()");
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             SyncAdapter.syncImmediately(getActivity());
             Log.v(LOG_TAG, "getDoodleData() - syncImmediately()");
