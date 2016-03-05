@@ -11,6 +11,8 @@ public final class Constants {
      * where active lists are stored (ie "activeLists")
      */
     public static final String FIREBASE_POPULAR_LIST = "popularList";
+    public static final String FIREBASE_RECENT_LIST = "recentList";
+    public static final String FIREBASE_VINTAGE_LIST = "vintageList";
 
 
     /**
@@ -24,6 +26,8 @@ public final class Constants {
      */
     public static final String FIREBASE_URL = BuildConfig.UNIQUE_FIREBASE_ROOT_URL;
     public static final String FIREBASE_URL_POPULAR_LIST = FIREBASE_URL + "/" + FIREBASE_POPULAR_LIST;
+    public static final String FIREBASE_URL_RECENT_LIST = FIREBASE_URL + "/" + FIREBASE_RECENT_LIST;
+    public static final String FIREBASE_URL_VINTAGE_LIST = FIREBASE_URL + "/" + FIREBASE_VINTAGE_LIST;
 
 
     /**

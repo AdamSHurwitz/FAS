@@ -182,17 +182,30 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                     Double popularity, Boolean recent, Boolean vintage) {
 
         //TODO: Add logic to put in PopularFragment, RecentFragment, VintageFragment
+        //TODO: Add logic to read from Objects and only put info into them if empty
 
         boolean favorite = false;
         boolean cart = false;
 
-        /**
-         * Create Firebase references
-         */
-        Firebase ref = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
-        Firebase newListRef = ref.push();
+        String firebaseUrl;
+
         Item item = new Item(item_id, title, description, search_strings, imageUrl, date, price,
                 popularity, recent, vintage, favorite, cart);
+        if (recent == false && vintage == false) {
+            firebaseUrl = Constants.FIREBASE_URL_POPULAR_LIST;
+        } else if (recent == true) {
+            firebaseUrl = Constants.FIREBASE_URL_RECENT_LIST;
+        } else {
+            firebaseUrl = Constants.FIREBASE_URL_VINTAGE_LIST;
+        }
+
+        /**
+         * Create Firebase reference
+         */
+     /*   Firebase ref = new Firebase(Constants.FIREBASE_URL_POPULAR_LIST);
+        Firebase newListRef = ref.push();*/
+        Firebase ref = new Firebase(firebaseUrl);
+        Firebase newListRef = ref.push();
         newListRef.setValue(item);
     }
 
