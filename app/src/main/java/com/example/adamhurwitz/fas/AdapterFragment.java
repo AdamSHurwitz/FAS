@@ -56,7 +56,29 @@ public class AdapterFragment extends Fragment {
          * Initialize UI elements
          */
         View rootView = inflater.inflate(R.layout.adapter_view_layout, container, false);
-        Log.v(LOG_TAG, "rootView is " + isRootFilled(rootView));
+        /*RecyclerView rv = (RecyclerView) inflater.inflate(
+                R.layout.adapter_view_layout, container, false);
+
+        Log.v(LOG_TAG, "rv is " + isRvFilled(rv));
+
+        Firebase mRef = new Firebase(Constants.FIREBASE_URL);
+
+        mImageRef = mRef.limitToLast(50);
+
+        rv = (RecyclerView) getActivity().findViewById(
+                R.id.firebaserecyclerview_id);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
+                R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
+            @Override
+            public void populateViewHolder(ItemHolder itemHolder, Item item, int position) {
+                itemHolder.setImage(item.getImageUrl());
+            }
+        };
+
+        rv.setAdapter(mRecyclerViewAdapter);*/
 
         /**
          *  Create Firebase references
@@ -79,27 +101,6 @@ public class AdapterFragment extends Fragment {
         };
 
         recyclerView.setAdapter(mRecyclerViewAdapter);
-
-        /*LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-
-        manager.setReverseLayout(false);
-        //if (mImages != null) {
-            mImages.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mImages.setHasFixedSize(true);
-            mImages.setLayoutManager(manager);
-        //}*/
-
-      /*  mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
-                R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
-            @Override
-            public void populateViewHolder(ItemHolder imageView, Item image, int position) {
-                imageView.setImage(image.getImageUrl());
-            }
-        };*/
-
-        //if (mImages != null) {
-        // mImages.setAdapter(mRecyclerViewAdapter);
-        //}
 
         return rootView;
     }
@@ -136,7 +137,7 @@ public class AdapterFragment extends Fragment {
         }
     }
 
-    public boolean isMimagesFilled(RecyclerView view) {
+    public boolean isRvFilled(RecyclerView view) {
         boolean x = false;
         if (view != null) {
             x = true;
