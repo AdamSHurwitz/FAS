@@ -56,29 +56,7 @@ public class AdapterFragment extends Fragment {
          * Initialize UI elements
          */
         View rootView = inflater.inflate(R.layout.adapter_view_layout, container, false);
-        /*RecyclerView rv = (RecyclerView) inflater.inflate(
-                R.layout.adapter_view_layout, container, false);
-
-        Log.v(LOG_TAG, "rv is " + isRvFilled(rv));
-
-        Firebase mRef = new Firebase(Constants.FIREBASE_URL);
-
-        mImageRef = mRef.limitToLast(50);
-
-        rv = (RecyclerView) getActivity().findViewById(
-                R.id.firebaserecyclerview_id);
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
-                R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
-            @Override
-            public void populateViewHolder(ItemHolder itemHolder, Item item, int position) {
-                itemHolder.setImage(item.getImageUrl());
-            }
-        };
-
-        rv.setAdapter(mRecyclerViewAdapter);*/
+        Log.v(LOG_TAG,"isRootFilled(rootView) - " + isRootFilled(rootView));
 
         /**
          *  Create Firebase references
@@ -87,13 +65,14 @@ public class AdapterFragment extends Fragment {
 
         mImageRef = mRef.limitToLast(50);
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(
                 R.id.firebaserecyclerview_id);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
-                R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
+        FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter =
+                new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class, R.layout.adapter_item_layout,
+                        ItemHolder.class, mImageRef) {
             @Override
             public void populateViewHolder(ItemHolder itemHolder, Item item, int position) {
                 itemHolder.setImage(item.getImageUrl());
@@ -137,18 +116,8 @@ public class AdapterFragment extends Fragment {
         }
     }
 
-    public boolean isRvFilled(RecyclerView view) {
-        boolean x = false;
-        if (view != null) {
-            x = true;
-        } else {
-            x = false;
-        }
-        return x;
-    }
-
     public boolean isRootFilled(View view) {
-        boolean x = false;
+        boolean x;
         if (view != null) {
             x = true;
         } else {
