@@ -29,6 +29,7 @@ public class AdapterFragment extends Fragment {
     private final String LOG_TAG = AdapterFragment.class.getSimpleName();
     private Firebase mRef;
     private Query mImageRef;
+    FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter;
     // private RecyclerView mImages;
     // private FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter;
 
@@ -70,12 +71,12 @@ public class AdapterFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FirebaseRecyclerAdapter<Item, ItemHolder> mRecyclerViewAdapter =
-                new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class, R.layout.adapter_item_layout,
-                        ItemHolder.class, mImageRef) {
+        mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Item, ItemHolder>(Item.class,
+                R.layout.adapter_item_layout, ItemHolder.class, mImageRef) {
             @Override
             public void populateViewHolder(ItemHolder itemHolder, Item item, int position) {
                 itemHolder.setImage(item.getImageUrl());
+                //TODO: Log here
             }
         };
 
@@ -91,6 +92,23 @@ public class AdapterFragment extends Fragment {
     }
 
     public static class ItemHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        Context mContext;
+
+        public ItemHolder(View itemView) {
+            super(itemView);
+            imageView = (ImageView) itemView.findViewById(R.id.adapter_item_imageview);
+        }
+
+        public void setImage(String imageUrl) {
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.adapter_item_imageview);
+            Picasso.with(mContext).load(imageUrl).noFade()
+                    .into(imageView);
+        }
+
+    }
+
+    /*public static class ItemHolder extends RecyclerView.ViewHolder {
         View mView;
         Context mContext;
 
@@ -104,6 +122,12 @@ public class AdapterFragment extends Fragment {
             Picasso.with(mContext).load(imageUrl).noFade()
                     .into(imageView);
         }
+    }*/
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRecyclerViewAdapter.cleanup();
     }
 
     private void getDoodleData() {
