@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/main_screen_background"
-    >
+    android:background="@color/main_screen_background">
     <!-- connects to NavTabs and DrawerView layout -->
 
     <include layout="@layout/menu_bar" />
@@ -28,5 +28,6 @@
             android:focusable="true"
             android:numColumns="auto_fit"
             android:clickable="true" />
+
     </LinearLayout>
 </LinearLayout>

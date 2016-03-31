@@ -17,6 +17,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.adamhurwitz.fas.data.Contract;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,7 +26,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class FavoritesActivity extends AppCompatActivity {
     public static final String LOG_TAG = FavoritesActivity.class.getSimpleName();
-
+    private AdView mAdView;
     FavoriteCursorAdapter recyclerAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -37,6 +39,14 @@ public class FavoritesActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_favorite_layout);
+
+        // BANNER AD
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                //.addTestDevice("MY_DEVICE_HASH")
+                .build();
+        mAdView.loadAd(adRequest);
+        // [END load_banner_ad]
 
         // Status Bar: Add Color
         Window window = getWindow();
@@ -150,4 +160,36 @@ public class FavoritesActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
+    // [START add_lifecycle_methods]
+    /** Called when leaving the activity */
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    /** Called when returning to the activity */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+        /*if (!mInterstitialAd.isLoaded()) {
+            requestNewInterstitial();
+        }*/
+    }
+
+    /** Called before the activity is destroyed */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
+    }
+    // [END add_lifecycle_methods]
 }

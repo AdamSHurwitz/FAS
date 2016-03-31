@@ -26,4 +26,7 @@
     <string name="complete_btn">Complete</string>
     <string name="order_qty">QTY </string>
     <string name="items_in_cart">ITEMS IN CART</string>
+
+    <!-- admob -->
+    <string name="test_banner_ad_unit_id">ca-app-pub-6447516466910649/9022734017</string>
 </resources>
