@@ -26,5 +26,6 @@
     <string name="complete_btn">Complete</string>
     <string name="order_qty">QTY </string>
     <string name="items_in_cart">ITEMS IN CART</string>
+    <string name="title_activity_second">SecondActivity</string>
 
 </resources>

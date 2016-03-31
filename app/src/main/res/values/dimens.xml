@@ -6,4 +6,5 @@
     <dimen name="list_item_image_largesize">100dp</dimen>
     <dimen name="list_item_image_largeWidthsize">300dp</dimen>
     <dimen name="list_item_image_largeHeightsize">100dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -13,11 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.stetho.DumperPluginsProvider;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.dumpapp.DumperPlugin;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 
@@ -26,11 +30,44 @@ public class MainActivity extends AppCompatActivity {
     // DrawerView: Initialize DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private DrawerLayout mDrawerLayout;
     // ---------------------------------------------------------------------------------------------
+    private InterstitialAd mInterstitialAd;
+    private Button mLoadInterstitialButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // [START instantiate_interstitial_ad]
+        // Create an InterstitialAd object. This same object can be re-used whenever you want to
+        // show an interstitial.
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-6447516466910649/2278196412");
+        // [END instantiate_interstitial_ad]
+
+        // [START create_interstitial_ad_listener]
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                beginSecondActivity();
+            }
+        });
+        // [END create_interstitial_ad_listener]
+
+        // [START display_interstitial_ad]
+       /* mLoadInterstitialButton = (Button) findViewById(R.id.load_interstitial_button);
+        mLoadInterstitialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    beginSecondActivity();
+                }
+            }
+        });*/
+        // [END display_interstitial_ad]
 
         /**
          * Create Firebase references
@@ -96,8 +133,13 @@ public class MainActivity extends AppCompatActivity {
                             // For rest of the options we just show a toast on click
 
                             case R.id.search_menu_itm:
-                                Toast.makeText(getApplicationContext(), "OPEN SEARCH BOX IN " +
-                                        "ACTION BAR", Toast.LENGTH_SHORT).show();
+                                if (mInterstitialAd.isLoaded()) {
+                                    mInterstitialAd.show();
+                                } else {
+                                    beginSecondActivity();
+                                }
+                                /*Toast.makeText(getApplicationContext(), "OPEN SEARCH BOX IN " +
+                                        "ACTION BAR", Toast.LENGTH_SHORT).show();*/
                                 return true;
 
                             case R.id.favorites_menu_itm:
@@ -160,6 +202,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Load a new interstitial ad asynchronously.
+     */
+    // [START request_new_interstitial]
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+    }
+    // [END request_new_interstitial]
+
+    private void beginSecondActivity() {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+    }
+
     // NavTabs: Add Fragments to the TabsAdapter, TabsAdapter recycles views - - - - - - - - - - - -
 
     private void setupViewPager(ViewPager viewPager) {
@@ -208,6 +267,15 @@ public class MainActivity extends AppCompatActivity {
             }
             //plugins.add(new SyncAdapterFragment());
             return plugins;
+        }
+    }
+
+    /** Called when returning to the activity */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!mInterstitialAd.isLoaded()) {
+            requestNewInterstitial();
         }
     }
 }
