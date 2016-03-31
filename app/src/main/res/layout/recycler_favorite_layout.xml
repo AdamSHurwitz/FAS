@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/test_banner_ad_unit_id"
+            ads:adUnitId="ca-app-pub-6447516466910649/9022734017"
             android:layout_marginBottom="16dp">
             <!--android:layout_alignTop="@id/content"-->
         </com.google.android.gms.ads.AdView>
