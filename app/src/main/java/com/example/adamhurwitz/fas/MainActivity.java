@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
     // [END request_new_interstitial]
 
     private void beginSecondActivity() {
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
